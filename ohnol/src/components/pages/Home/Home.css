@@ -1,0 +1,11 @@
+#main{
+    background-color: whitesmoke;
+    text-align:center;
+    width:80%;
+    border-radius: 20px;
+}
+
+.introduce{
+    font-size:20px;
+    font-weight:bold;
+}
