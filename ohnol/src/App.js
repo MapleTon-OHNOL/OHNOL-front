@@ -1,10 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-import Home from './components/pages/Home/Home'
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import LoginForm from "./pages/Login/LoginForm";
+import SignUp from "./pages/Login/SignUp";
+import AuthProvider from "./components/Auth/AuthProvider";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
-    <Home/>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          {/* 로그인 라우팅 */}
+          <Route path="/" element={<Login />} />
+          <Route path="/loginForm" element={<LoginForm />} />
+          <Route path="/signUp" element={<SignUp />} />
+
+          {/* 로그인해야만 접근가능한 URL */}
+          <Route element={<AuthProvider />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
