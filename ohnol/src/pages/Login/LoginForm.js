@@ -37,7 +37,7 @@ const LoginForm = () => {
       .then((response) => {
         console.log(response);
         localStorage.setItem("user", response.data.accessToken); // 토큰 저장하기
-        localStorage.getItem("user");
+
         setIsLoggedIn(true); // 로그인 상태변경
         navigate("/home");
       })
