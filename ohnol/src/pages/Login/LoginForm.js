@@ -4,6 +4,8 @@ import axios from "axios";
 import { LoginState } from "../../states/LoginState";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router";
+import "./LoginForm.css";
+import loginImg from "../../imgs/login/loginRegister.png";
 
 const LoginForm = () => {
   const [loginInputs, setLoginInputs] = useState({
@@ -47,28 +49,38 @@ const LoginForm = () => {
   };
 
   return (
-    <form id="login" className="input-group">
-      <input
-        type="text"
-        className="input-field"
-        placeholder="User Email"
-        required
-        onChange={onChangeLogin}
-        name="loginEmail"
-      />
-      <input
-        type="password"
-        className="input-field"
-        placeholder="Enter Password"
-        required
-        onChange={onChangeLogin}
-        name="loginPwd"
-      />
+    <div className="loginFormContainer">
+      <div className="longinText">
+        <h2>LOGIN</h2>
+      </div>
+      <div className="loginImg">
+        <img src={loginImg} alt="로그인 이미지" />
+      </div>
 
-      <button className="submit" onClick={loginSubmit}>
-        Login
-      </button>
-    </form>
+      <form id="login" className="input-group">
+        <input
+          type="text"
+          className="input-field"
+          placeholder="User Email"
+          required
+          onChange={onChangeLogin}
+          name="loginEmail"
+        />
+
+        <input
+          type="password"
+          className="input-field"
+          placeholder="Enter Password"
+          required
+          onChange={onChangeLogin}
+          name="loginPwd"
+        ></input>
+
+        <button className="submit" onClick={loginSubmit}>
+          <p>로그인하기</p>
+        </button>
+      </form>
+    </div>
   );
 };
 

@@ -23,6 +23,7 @@ function App() {
           {/* 로그인해야만 접근가능한 URL */}
           <Route element={<AuthProvider />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/writeLetter" element={<WriteLetter />} />
           </Route>
         </Routes>
       </BrowserRouter>
