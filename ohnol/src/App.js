@@ -5,13 +5,16 @@ import LoginForm from "./pages/Login/LoginForm";
 import SignUp from "./pages/SignUp/SignUp";
 import AuthProvider from "./components/Auth/AuthProvider";
 import Home from "./pages/Home/Home";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <Header />
         <Routes>
           {/* 로그인 라우팅 */}
+
           <Route path="/" element={<Login />} />
           <Route path="/loginForm" element={<LoginForm />} />
           <Route path="/signUp" element={<SignUp />} />

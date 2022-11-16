@@ -1,0 +1,41 @@
+body{
+    /* 스크롤바 숨기기 */
+    overflow-y: hidden; 
+}
+.mainLoginContainer{
+    background-color: var(--beige);
+    height: 100vh;
+    text-align: center;
+    line-height: 2.5em;
+}
+
+.mainLogin{
+    padding-top: 200px;
+}
+
+.mainLogin img {
+    width: 300px;
+}
+.mainLogin p  {
+    color: black;
+    font-weight: 900;
+    font-size: 1.5em;
+}
+.mainLogin p span {
+    font-size: 1.5em;
+}
+
+.mainLogin .bigContent{
+    color: green;
+}
+.mainLogin .bigContent span:nth-of-type(1){
+    color: red;
+    margin-right: 10px;
+}
+
+.mainLogin .content span:nth-of-type(1){
+    color:red;
+}
+.mainLogin .content span:nth-of-type(2){
+    color:green;
+}

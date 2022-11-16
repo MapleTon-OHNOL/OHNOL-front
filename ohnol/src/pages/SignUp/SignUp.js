@@ -27,7 +27,7 @@ const SignUp = () => {
     // Request API.
     e.preventDefault();
     axios
-      .post("http://52.78.126.242:8080/auth/signup", {
+      .post("http://13.125.105.33:8080/auth/signup", {
         username: username,
         email: email,
         password: pwd,
