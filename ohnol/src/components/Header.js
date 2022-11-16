@@ -19,19 +19,20 @@ const Header = () => {
       const accesToken = localStorage.getItem("user");
       axios
         .post(
-          "http://13.125.105.33:8080/auth/info",
+          "http://13.125.105.33:8080/auth/infoByToken",
           (axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${accesToken}`)
         )
         .then((response) => {
+          console.log(response.data);
           setUserState(response.data);
         })
         .catch((error) => {
           console.log(error.response);
         });
     }
-  }, [isLoggedIn]);
+  }, []);
 
   // 로그아웃기능
   const logoutHandler = (e) => {
@@ -52,6 +53,12 @@ const Header = () => {
       });
     localStorage.removeItem("user"); // 로컬스토리지에 있는 토큰삭제
     setIsLoggedIn(false); // 로그인전역상태 false변경
+    setUserState({
+      email: "",
+      identifier: "",
+      messageCount: 0,
+      username: "",
+    });
   };
 
   return (
@@ -70,7 +77,7 @@ const Header = () => {
       ) : (
         <div className="logoutDiv">
           <div className="userName">
-            <span>{userState.username}</span>님
+            <span>{userState ? userState.username : "사용자"}</span>님
           </div>
           <button onClick={logoutHandler}>로그아웃</button>
         </div>

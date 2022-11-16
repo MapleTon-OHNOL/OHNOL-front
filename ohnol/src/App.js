@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import AuthProvider from "./components/Auth/AuthProvider";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header";
+import WriteLetter from "./pages/WriteLetter/WriteLetter";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           {/* 로그인해야만 접근가능한 URL */}
           <Route element={<AuthProvider />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/writeLetter" element={<WriteLetter />} />
           </Route>
         </Routes>
       </BrowserRouter>

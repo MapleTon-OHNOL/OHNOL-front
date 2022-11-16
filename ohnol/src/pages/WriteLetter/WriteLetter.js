@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const WriteLetter = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <h2>h2</h2>
+    </div>
+  );
 };
 
 export default WriteLetter;
