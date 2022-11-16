@@ -30,6 +30,8 @@ const Home = () => {
     setIsLoggedIn(false); // 로그인전역상태 false변경
   };
   console.log(isLoggedIn);
+
+  
   return (
     <section id="main" className="my-5 py-5 px-4 mx-auto">
       <div className="introduce">오랜만에 놀러와!</div>
