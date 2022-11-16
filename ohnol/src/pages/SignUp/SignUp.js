@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import signUpImg from "../../imgs/login/loginRegister.png";
+import "../../pages/SignUp/SignUp.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -45,36 +47,45 @@ const SignUp = () => {
   };
 
   return (
-    <form id="register" action="" className="input-group">
-      <input
-        type="text"
-        className="input-field"
-        placeholder="User name"
-        required
-        name="username"
-        onChange={onChangeRegister}
-      />
-      <input
-        type="email"
-        className="input-field"
-        placeholder="Your Email"
-        required
-        onChange={onChangeRegister}
-        name="email"
-      />
-      <input
-        type="password"
-        className="input-field"
-        placeholder="Enter Password"
-        required
-        onChange={onChangeRegister}
-        name="pwd"
-      />
+    <div className="signUpContainer">
+      <div className="signUpText">
+        <h2>LOGIN</h2>
+      </div>
+      <div className="signUpImg">
+        <img src={signUpImg} alt="회원가입 이미지" />
+      </div>
 
-      <button className="submit" onClick={register}>
-        REGISTER
-      </button>
-    </form>
+      <form id="register" action="" className="input-group">
+        <input
+          type="text"
+          className="input-field"
+          placeholder="User name"
+          required
+          name="username"
+          onChange={onChangeRegister}
+        />
+        <input
+          type="email"
+          className="input-field"
+          placeholder="Your Email"
+          required
+          onChange={onChangeRegister}
+          name="email"
+        />
+        <input
+          type="password"
+          className="input-field"
+          placeholder="Enter Password"
+          required
+          onChange={onChangeRegister}
+          name="pwd"
+        />
+
+        <button className="submit" onClick={register}>
+          <p>회원가입하기</p>
+        </button>
+      </form>
+    </div>
   );
 };
 
