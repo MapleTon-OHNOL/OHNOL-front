@@ -1,11 +1,108 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+*{
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
 #main{
     background-color: whitesmoke;
-    text-align:center;
-    width:80%;
-    border-radius: 20px;
+    background-image:url('../../imgs/home/backHome.png');
+    background-position:center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    font-size: 21px;
+    height:33em;
 }
 
 .introduce{
-    font-size:20px;
+    margin-left:10%;
+}
+
+.introduce-heart{
+    display: flex;
+    align-items: center;
+}
+
+.introduce-comment{
+    padding-left:0.2em;
+    color:#584941;
+    font-size:1em;
+    font-weight: bold;
+}
+
+.calendar{
+    display: flex;
+    align-items: center;
+}
+/*
+.img-cal{
+    width: 35px;
+    height: 52px;
+}
+*/
+
+.img-cal{
+    background-image:url('../../imgs/home/countCal.png');
+    background-size: contain;
+    width: 35px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date{
+    font-size:2em;
+    font-weight:bold;
+    color:#FFFFFF;
+}
+.date-comment{
+    text-align: center;
+    font-size:0.6em;
+    color:#b33939;
+    font-weight: bold;
+}
+
+.dang{
+    font-size:2em;
+    font-weight:bold;
+    color:#584941;
+}
+
+.guide{
+    font-size:1.2em;
+    color:#584941;
+    border-radius: 35px;
+    background-color:#F7F1E3;
+    margin-left:20%;
+    
+    
+}
+
+.name-guide{
+    font-size:1em;
     font-weight:bold;
 }
+.cnt-guide{
+    color: #b33939;
+}
+
+.btn-copy{
+    font-size:1em;
+    color:#FFFFFF;
+    border-radius: 8px;
+    background-color:#b33939;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width:80%;
+    min-width: 332px;
+    min-height: 47px;
+    margin-left:18%;
+}
+
+.completeCopy{
+    display:none;
+}
+

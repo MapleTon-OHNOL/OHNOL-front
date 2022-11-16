@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import AuthProvider from "./components/Auth/AuthProvider";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header";
+import Footer from "./components/Footer"
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Footer></Footer>
+
     </div>
   );
 }
