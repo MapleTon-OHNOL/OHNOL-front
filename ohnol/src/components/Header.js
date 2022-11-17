@@ -25,7 +25,7 @@ const Header = () => {
           ] = `Bearer ${accesToken}`)
         )
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setUserState(response.data);
         })
         .catch((error) => {
@@ -64,7 +64,7 @@ const Header = () => {
   return (
     <div className="headerContainer">
       <div className="logoDiv">
-        <Link to="/">
+        <Link to="/home">
           <img src={logo} alt="로고이미지" />
         </Link>
       </div>
