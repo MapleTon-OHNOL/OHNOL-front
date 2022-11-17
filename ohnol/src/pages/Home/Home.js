@@ -1,4 +1,4 @@
-import {React,useEffect,useState} from "react";
+import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useRecoilState } from "recoil";
@@ -8,7 +8,7 @@ import axios from "axios";
 import heart from "../../imgs/home/heart.png";
 import treeGift from "../../imgs/home/treeGift.png";
 import bell from "../../imgs/home/bell.png";
-import check from "../../imgs/home/checkCircle.png"
+import check from "../../imgs/home/checkCircle.png";
 import Count from "./Count";
 import OpenLetter from "./OpenLetter";
 import End from "./End";
@@ -21,46 +21,49 @@ const Home = () => {
 
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-  const [style, setStyle] = useState(false)
-  //identify 가져오기
-  const [identify,setIdentify] = useState("")
+  const [style, setStyle] = useState(false);
 
   //복사 완료 뜨게
   const copyComplete = text => {
     if(isLoggedIn){
       setStyle(style => !style);
-      //console.log(style);
+      console.log(style);
   
       //클립보드복사
-      let url = '';
+      // 흐름 1.
+      let url = "";
       const textarea = document.createElement("textarea");
       document.body.appendChild(textarea);
       url = window.document.location.href;
-      //url += "/"+identify;
+
       textarea.value = url;
       textarea.select();
       document.execCommand("copy");
       console.log(textarea);
       document.body.removeChild(textarea);
       alert("클립보드에 복사되었습니다.");
-    }else{
-      alert('로그인을 하지 않으면 복사할 수 없습니다.')
+    } else {
+      alert("로그인을 하지 않으면 복사할 수 없습니다.");
     }
-    
-  }
+  };
 
-  const completeNotify = useEffect(() =>{
-    if(style){ //true 이면
-      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
-            <img src={check} width="20px"/>
-            <span>복사 완료</span>
-      </div>
+  const completeNotify = useEffect(() => {
+    if (style) {
+      //true 이면
+      <div
+        className="completeCopy"
+        style={{ color: { style } ? "red" : "blue" }}
+      >
+        <img src={check} width="20px" />
+        <span>복사 완료</span>
+      </div>;
+    } else {
+      <div
+        className="completeCopy"
+        style={{ color: { style } ? "red" : "blue" }}
+      ></div>;
     }
-    else{
-      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
-      </div>
-    }
-  },[style])
+  }, [style]);
 
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
@@ -79,7 +82,6 @@ const Home = () => {
         .then((response) => {
           //console.log(response.data);
           setUserState(response.data);
-          setIdentify(response.data.identifier);
         })
         .catch((error) => {
           console.log(error.response);
@@ -90,14 +92,12 @@ const Home = () => {
   //작성하러가기
   const navigate = useNavigate();
   const goWrite = () => {
-    if(isLoggedIn){
+    if (isLoggedIn) {
       navigate("/writeLetter");
-    }else{
-      alert('로그인을 하지 않으면 편지를 작성할 수 없습니다.')
+    } else {
+      alert("로그인을 하지 않으면 편지를 작성할 수 없습니다.");
     }
-    
   };
-
 
   return (
     <>
@@ -108,18 +108,16 @@ const Home = () => {
             <img src={heart} alt="리본하트이미지"></img>
             <span className="introduce-comment">마음이 통하기까지</span>
           </div>
-          <Count/>
+          <Count />
         </div>
 
         <div className="treeGiftBell">
-          <div className="treeGiftBell-container">
-            <div className="treeGift"><img src={treeGift} alt="트리선물이미지"/></div>
-            <div className="bell"><img src={bell} alt="종이미지"/></div>
-          </div>
+          
+          <img src={treeGift} alt="트리선물이미지"/>
+          <img src={bell} alt="종이미지"/>
         </div>
 
 
-        
         <div className="guide">
           <div className="guide-container">
             <div className="guide-top">
@@ -135,18 +133,16 @@ const Home = () => {
               나도 놀러 가기!
             </div>
           </div>
-            <div className="completeNotf">
-              {style?       <div className="completeCopy">
-              <img src={check} alt="체크버튼" width="20px"/>
-              <span>복사 완료</span>
-            </div>: null}
-            </div>
-          
+          <div className="completeNotf">
+            {style?       <div className="completeCopy">
+            <img src={check} alt="체크버튼" width="20px"/>
+            <span>복사 완료</span>
+          </div>: null}
+          </div>
         </div>
       </section>
-      <OpenLetter/>
-      <End/> 
-      
+      <OpenLetter />
+      <End />
     </>
   );
 };
