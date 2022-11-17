@@ -58,7 +58,7 @@ textarea:focus { outline: none; }
 .bottomWrap .letterSubmit{
     position: absolute;
     top: 1px;
-    left: 10%;
+    left: 4%;
     padding: 12px 24px;
     width: 450px;
     background-color: var(--dark_brown);
@@ -70,7 +70,7 @@ textarea:focus { outline: none; }
 /* 전체화면일 때 중앙 맞추기 */
 @media (min-width: 1200px) {
     .bottomWrap .letterSubmit {
-      left: 39.5%;
+      left: 38.5%;
     }
   }
 

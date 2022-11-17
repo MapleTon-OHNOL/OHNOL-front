@@ -12,6 +12,7 @@ import check from "../../imgs/home/checkCircle.png"
 import Count from "./Count";
 import OpenLetter from "./OpenLetter";
 import End from "./End";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
@@ -94,7 +95,12 @@ const Home = () => {
   //작성하러가기
   const navigate = useNavigate();
   const goWrite = () => {
-    navigate("/writeLetter");
+    if(isLoggedIn){
+      navigate("/writeLetter");
+    }else{
+      alert('로그인을 하지 않으면 편지를 작성할 수 없습니다.')
+    }
+    
   };
 
 

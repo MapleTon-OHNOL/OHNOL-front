@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../states/LoginState";
@@ -13,15 +13,18 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
-
+  const [userID ,setUserId] = useState('')
 
   const navigate = useNavigate();
   const goToHome = ()=>{
     if(isLoggedIn){
-      navigate('/home')
+      // 로그인을 했다면 ID같이 URL에 보내기
+      navigate(`/home/${userID}`)
     }else{
-      alert('로그인을 해야합니다.')
+      // 로그인하지 않았을 때는 그냥 home으로 보내기
+      navigate('/home/:userID')
     }
+      
   }
   // 회원정보 가져오기
   useEffect(() => {
@@ -37,6 +40,7 @@ const Header = () => {
         .then((response) => {
           // console.log(response.data);
           setUserState(response.data);
+          setUserId(response.data.identifier)
         })
         .catch((error) => {
           console.log(error.response);
