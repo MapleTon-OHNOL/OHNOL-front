@@ -22,18 +22,18 @@ const Home = () => {
     setStyle(style => !style);
     console.log(style);
   }
-  const completeNotify = useEffect(() =>{
-    if(style){ //true 이면
-      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
-            <img src={check} width="20px"/>
-            <span>복사 완료</span>
-      </div>
-    }
-    else{
-      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
-      </div>
-    }
-  },[style])
+  // const completeNotify = useEffect(() =>{
+  //   if(style){ //true 이면
+  //     <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
+  //           <img src={check} width="20px"/>
+  //           <span>복사 완료</span>
+  //     </div>
+  //   }
+  //   else{
+  //     <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
+  //     </div>
+  //   }
+  // },[style])
 
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
@@ -83,7 +83,10 @@ const Home = () => {
             내 집 링크 복사하기
           </div>
           <div className="completeNotf">
-            {completeNotify}
+            {style?       <div className="completeCopy">
+            <img src={check} alt="체크버튼" width="20px"/>
+            <span>복사 완료</span>
+      </div>: null}
           </div>
         </div>
       </section>
