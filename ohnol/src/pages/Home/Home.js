@@ -3,13 +3,13 @@ import "./Home.css";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../states/LoginState";
 import { UserState } from "../../states/UserState";
-import moment from 'moment';
 import axios from "axios";
 import heart from "../../imgs/home/heart.png";
 import countCal from "../../imgs/home/countCal.png"
 import check from "../../imgs/home/checkCircle.png"
 import Count from "./Count";
 import OpenLetter from "./OpenLetter";
+import End from "./End";
 
 const Home = () => {
   // 로그인해야만 보이는 곳입니다
@@ -86,6 +86,7 @@ const Home = () => {
       </section>
 
       <OpenLetter/>
+      <End/>
     </>
   );
 };
