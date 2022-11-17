@@ -5,7 +5,8 @@ import { LoginState } from "../../states/LoginState";
 import { UserState } from "../../states/UserState";
 import axios from "axios";
 import heart from "../../imgs/home/heart.png";
-import countCal from "../../imgs/home/countCal.png"
+import treeGift from "../../imgs/home/treeGift.png";
+import bell from "../../imgs/home/bell.png";
 import check from "../../imgs/home/checkCircle.png"
 import Count from "./Count";
 import OpenLetter from "./OpenLetter";
@@ -15,7 +16,7 @@ const Home = () => {
   // 로그인해야만 보이는 곳입니다
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-  const [style, setStyle] = useState(true)
+  const [style, setStyle] = useState(false)
 
   //복사 완료 뜨게
   function copyComplete() {
@@ -72,6 +73,13 @@ const Home = () => {
           <Count/>
         </div>
 
+        <div className="treeGiftBell">
+          
+          <img src={treeGift} alt="트리선물이미지"/>
+          <img src={bell} alt="종이미지"/>
+        </div>
+
+
         <div className="guide">
           <div className="guide-top">
             <span className="name-guide">{userState.username}</span>
@@ -86,13 +94,14 @@ const Home = () => {
             {style?       <div className="completeCopy">
             <img src={check} alt="체크버튼" width="20px"/>
             <span>복사 완료</span>
-      </div>: null}
+          </div>: null}
           </div>
         </div>
       </section>
 
-      <OpenLetter/>
-      <End/>
+      {/* <OpenLetter/>
+      <End/> */}
+      
     </>
   );
 };
