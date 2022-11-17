@@ -4,7 +4,7 @@ import letter from '../../imgs/home/letter.png';
 import springRed from '../../imgs/home/springRed.png';
 
 const OpenLetter = () => {
-  return (
+return (
     <section className="OpenLetter">
         <div className="letterImg"><img src={letter} alt="편지이미지" className="letterImg"/></div>
 
@@ -26,7 +26,7 @@ const OpenLetter = () => {
         
     </section>
     
-  );
+);
 }
 
 export default OpenLetter
