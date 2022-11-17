@@ -27,8 +27,9 @@ function App() {
             <Route path="/writeLetter" element={<WriteLetter />} />
           </Route>
         </Routes>
+        <Footer/>
       </BrowserRouter>
-      <Footer></Footer>
+      
 
     </div>
   );

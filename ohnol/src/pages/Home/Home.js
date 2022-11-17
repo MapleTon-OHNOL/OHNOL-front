@@ -50,7 +50,7 @@ const Home = () => {
           ] = `Bearer ${accesToken}`)
         )
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setUserState(response.data);
         })
         .catch((error) => {
