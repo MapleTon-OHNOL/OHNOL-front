@@ -5,13 +5,16 @@
 }
 
 #main{
+    font-size: 21px;
     background-color: whitesmoke;
     background-image:url('../../imgs/home/backHome.png');
-    background-position:center;
-    background-size:cover;
+    
     background-repeat: no-repeat;
-    font-size: 21px;
-    height:33em;
+    background-position: top center;
+    background-size: cover;
+    background-attachment: fixed;
+    
+    
 }
 
 .introduce{
@@ -30,10 +33,6 @@
     font-weight: bold;
 }
 
-.calendar{
-    display: flex;
-    align-items: center;
-}
 /*
 .img-cal{
     width: 35px;
@@ -70,21 +69,27 @@
 }
 
 .guide{
+    text-align: center;
+}
+
+.guide-top{
     font-size:1.2em;
     color:#584941;
     border-radius: 35px;
+    width:80%;
     background-color:#F7F1E3;
-    margin-left:20%;
-    
-    
 }
 
 .name-guide{
-    font-size:1em;
+    font-size:1.2em;
     font-weight:bold;
 }
 .cnt-guide{
     color: #b33939;
+    font-weight: bold;
+    text-shadow: -1px 0 #FFFFFF, 0 1px #FFFFFF, 1px 0 #FFFFFF, 0 -1px #FFFFFF;
+    font-size:1.5em;
+    line-height: 28px;
 }
 
 .btn-copy{
@@ -99,10 +104,10 @@
     width:80%;
     min-width: 332px;
     min-height: 47px;
-    margin-left:18%;
 }
 
 .completeCopy{
-    display:none;
+    display: flex;
+    align-items: center;
 }
 

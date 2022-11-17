@@ -7,6 +7,7 @@ import AuthProvider from "./components/Auth/AuthProvider";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer"
+import WriteLetter from "./pages/WriteLetter/WriteLetter"
 
 function App() {
   return (

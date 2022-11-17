@@ -1,18 +1,48 @@
-import React from "react";
+import {React,useEffect,useState} from "react";
 import "./Home.css";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../states/LoginState";
-import {useState} from 'react';
+import { UserState } from "../../states/UserState";
 import axios from "axios";
 import heart from "../../imgs/home/heart.png";
 import countCal from "../../imgs/home/countCal.png"
-import check from "../../imgs/home/check.png"
+import check from "../../imgs/home/checkCircle.png"
 
 const Home = () => {
   // 로그인해야만 보이는 곳입니다
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-  const [style, setStyle] = useState({display:"none"})
+  const [style, setStyle] = useState(false)
+
+  //복사 완료 뜨게
+  function copyComplete() {
+    setStyle(style => !style);
+  }
+
+  // 회원정보 상태
+  const [userState, setUserState] = useRecoilState(UserState);
+
+  // 회원정보 가져오기
+  useEffect(() => {
+    if (isLoggedIn) {
+      const accesToken = localStorage.getItem("user");
+      axios
+        .post(
+          "http://13.125.105.33:8080/auth/infoByToken",
+          (axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${accesToken}`)
+        )
+        .then((response) => {
+          console.log(response.data);
+          setUserState(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  }, []);
+
 
   const [now] = useState(new Date());
   var finish = new Date('2022-12-25');
@@ -38,14 +68,11 @@ const Home = () => {
     const diffSecsOne = () => Math.floor((timeDiff / 1000 % 60)%10);
 
     const[SecsOne, setSecsOne] = useState(diffSecsOne());
-    setInterval(()=>{
+    setInterval((e)=>{
       setSecsOne(diffSecsOne());
     },1000)
   }
 
-  function copyComplete() {
-    setStyle({display:"inline"})
-  }
 
   return (
     <section id="main">
@@ -55,7 +82,7 @@ const Home = () => {
           <img src={heart} alt="리본하트이미지"></img>
           <span className="introduce-comment">마음이 통하기까지</span>
         </div>
-        <table classNameName="calendar" border="1">
+        <table className="calendar" border="1">
           <tr className="time">
             <th scope="col"><div className="img-cal"><div className="date days-ten"> {diffDaysTen}</div></div></th>
             <th scope="col"><div className="img-cal"><div className="date days-one"> {diffDaysOne}</div></div></th>
@@ -82,14 +109,19 @@ const Home = () => {
       </div>
 
       <div className="guide">
-        <span className="name-guide">임윤지</span><span className="guide1">님의 집에</span><span className="cnt-guide">32</span><span className="guide2">명이 놀러 왔어요!</span>
-      </div>
-      <div className="btn-copy" onClick={copyComplete}>
-        내 집 링크 복사하기
-      </div>
-      <div className="completeCopy" style={{style}}>
-        <img src={check} width="20px"/>
-        복사 완료
+        <div className="guide-top">
+          <span className="name-guide">{userState.username}</span><span className="guide1">님의 집에</span><span className="cnt-guide">32</span><span className="guide2">명이 놀러 왔어요!</span>
+        </div>
+        <div className="btn-copy" onClick={copyComplete}>
+          내 집 링크 복사하기
+        </div>
+        <div classNmae="completeNotf">
+          <div className="completeCopy">
+            <img src={check} width="20px"/>
+            <span style={style}>복사 완료</span>
+          </div>
+        </div>
+        
       </div>
     </section>
   );
