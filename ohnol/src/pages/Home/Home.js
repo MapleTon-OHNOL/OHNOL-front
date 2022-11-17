@@ -24,14 +24,18 @@ const Home = () => {
   }
   const completeNotify = useEffect(() =>{
     if(style){ //true 이면
-      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
+      return(
+        <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
             <img src={check} width="20px"/>
             <span>복사 완료</span>
-      </div>
+        </div>
+      )
     }
     else{
-      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
-      </div>
+      return(
+        <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
+        </div>
+      )
     }
   },[style])
 
