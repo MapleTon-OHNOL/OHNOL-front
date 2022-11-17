@@ -1,4 +1,5 @@
 import {React,useEffect,useState} from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../states/LoginState";
@@ -17,12 +18,32 @@ const Home = () => {
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [style, setStyle] = useState(false)
+  //identify 가져오기
+  const [identify,setIdentify] = useState("")
 
   //복사 완료 뜨게
-  function copyComplete() {
+  const copyComplete = text => {
     setStyle(style => !style);
     console.log(style);
+
+    //클립보드복사
+    // 흐름 1.
+    let url = '';
+    const textarea = document.createElement("textarea");
+    document.body.appendChild(textarea);
+    url = window.document.location.href;
+    //url += "/"+identify;
+    textarea.value = url;
+    textarea.select();
+    document.execCommand("copy");
+    console.log(textarea);
+    document.body.removeChild(textarea);
+    alert("클립보드에 복사되었습니다.");
+    
   }
+  
+
+
   const completeNotify = useEffect(() =>{
     if(style){ //true 이면
       <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
@@ -53,12 +74,19 @@ const Home = () => {
         .then((response) => {
           // console.log(response.data);
           setUserState(response.data);
+          setIdentify(response.data.identifier);
         })
         .catch((error) => {
           console.log(error.response);
         });
     }
   }, []);
+
+  //작성하러가기
+  const navigate = useNavigate();
+  const goWrite = () => {
+    navigate("/writeLetter");
+  };
 
 
   return (
@@ -90,6 +118,9 @@ const Home = () => {
           <div className="btn-copy" onClick={copyComplete}>
             내 집 링크 복사하기
           </div>
+          <div className="btn-copy" onClick={goWrite}>
+            나도 놀러 가기!
+          </div>
           <div className="completeNotf">
             {style?       <div className="completeCopy">
             <img src={check} alt="체크버튼" width="20px"/>
@@ -99,8 +130,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* <OpenLetter/>
-      <End/> */}
+      <OpenLetter/>
+      <End/> 
       
     </>
   );
