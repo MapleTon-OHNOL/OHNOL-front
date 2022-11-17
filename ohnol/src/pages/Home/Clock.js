@@ -36,6 +36,7 @@ class Clock extends Component {
     return (
         <>
         <table className="calendar">
+        <thead>
           <tr className="time">
             <th scope="col"><div className="img-cal"><div className="date days-ten"> {this.state.diffDaysTen}</div></div></th>
             <th scope="col"><div className="img-cal"><div className="date days-one"> {this.state.diffDaysOne}</div></div></th>
@@ -49,6 +50,8 @@ class Clock extends Component {
             <th scope="col"><div className="img-cal"><div className="date seconds-ten"> {this.state.diffSecsTen}</div></div></th>
             <th scope="col"><div className="img-cal"><div className="date seconds-one"> {this.state.diffSecsOne}</div></div></th>
           </tr>
+          </thead>
+          <tbody>
           <tr>
             <td className="date-comment" scope="row" colSpan="2">Days</td>
             <td></td>
@@ -58,6 +61,7 @@ class Clock extends Component {
             <td></td>
             <td className="date-comment" scope="row" colSpan="2">Seconds</td>
           </tr>
+          </tbody>
         </table>
         </>
     );

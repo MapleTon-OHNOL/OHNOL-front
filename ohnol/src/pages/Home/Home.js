@@ -74,12 +74,15 @@ const Home = () => {
 
         <div className="guide">
           <div className="guide-top">
-            <span className="name-guide">{userState.username}</span><span className="guide1">님의 집에</span><span className="cnt-guide">32</span><span className="guide2">명이 놀러 왔어요!</span>
+            <span className="name-guide">{userState.username}</span>
+            <span className="guide1">님의 집에</span>
+            <span className="cnt-guide">32</span>
+            <span className="guide2">명이 놀러 왔어요!</span>
           </div>
           <div className="btn-copy" onClick={copyComplete}>
             내 집 링크 복사하기
           </div>
-          <div classNmae="completeNotf">
+          <div className="completeNotf">
             {completeNotify}
           </div>
         </div>
