@@ -1,4 +1,5 @@
 .OpenLetter{
+    clear:both;
     text-align: center;
     background-color: #ECD5A1;
 }
@@ -53,7 +54,7 @@
 
 .springRed{
     position:relative;
-    top:-16em;
+    top:-19em;
 }
 
 

@@ -10,9 +10,10 @@ body{
 #main{
     font-size: 21px;
     background-color: whitesmoke;
-    background-image:url('../../imgs/home/backRoom.png');
+    background-image:url('../../imgs/home/backRoom2.png');
+    background-repeat: repeat-x;
     background-size: contain;
-    height:700px;
+    height:800px;
     
 }
 
@@ -67,8 +68,29 @@ body{
     color:#584941;
 }
 
+
+.treeGift{
+    float:left;
+    margin-top:10%;
+    margin-bottom: 5%;
+}
+
+.bell{
+    float:right;
+    margin-top:10%;
+}
+
+.guide-container{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .guide{
     text-align: center;
+    clear:both;
 }
 
 .guide-top{
@@ -77,6 +99,8 @@ body{
     border-radius: 35px;
     width:80%;
     background-color:#F7F1E3;
+    padding:1%;
+    margin-bottom:3%;
 }
 
 .name-guide{
@@ -108,9 +132,10 @@ body{
     width:80%;
     min-width: 332px;
     min-height: 47px;
+    margin-bottom: 2%;
 }
 
 .completeCopy{
-    align-items: center;
+    transition: all ease 2s 0s;
 }
 

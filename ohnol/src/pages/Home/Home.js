@@ -29,7 +29,7 @@ const Home = () => {
   const copyComplete = text => {
     if(isLoggedIn){
       setStyle(style => !style);
-      console.log(style);
+      //console.log(style);
   
       //클립보드복사
       let url = '';
@@ -112,31 +112,36 @@ const Home = () => {
         </div>
 
         <div className="treeGiftBell">
-          
-          <img src={treeGift} alt="트리선물이미지"/>
-          <img src={bell} alt="종이미지"/>
+          <div className="treeGiftBell-container">
+            <div className="treeGift"><img src={treeGift} alt="트리선물이미지"/></div>
+            <div className="bell"><img src={bell} alt="종이미지"/></div>
+          </div>
         </div>
 
 
+        
         <div className="guide">
-          <div className="guide-top">
-            <span className="name-guide">{userState.username}</span>
-            <span className="guide1">님의 집에</span>
-            <span className="cnt-guide">{userState.messageCount}</span>
-            <span className="guide2">명이 놀러 왔어요!</span>
+          <div className="guide-container">
+            <div className="guide-top">
+              <span className="name-guide">{userState.username}</span>
+              <span className="guide1">님의 집에</span>
+              <span className="cnt-guide">{userState.messageCount}</span>
+              <span className="guide2">명이 놀러 왔어요!</span>
+            </div>
+            <div className="btn-copy" onClick={copyComplete}>
+              내 집 링크 복사하기
+            </div>
+            <div className="btn-copy" onClick={goWrite}>
+              나도 놀러 가기!
+            </div>
           </div>
-          <div className="btn-copy" onClick={copyComplete}>
-            내 집 링크 복사하기
-          </div>
-          <div className="btn-copy" onClick={goWrite}>
-            나도 놀러 가기!
-          </div>
-          <div className="completeNotf">
-            {style?       <div className="completeCopy">
-            <img src={check} alt="체크버튼" width="20px"/>
-            <span>복사 완료</span>
-          </div>: null}
-          </div>
+            <div className="completeNotf">
+              {style?       <div className="completeCopy">
+              <img src={check} alt="체크버튼" width="20px"/>
+              <span>복사 완료</span>
+            </div>: null}
+            </div>
+          
         </div>
       </section>
       <OpenLetter/>
