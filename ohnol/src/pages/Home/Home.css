@@ -82,6 +82,7 @@ body{
 .name-guide{
     font-size:1.2em;
     font-weight:bold;
+    letter-spacing: 1px;
 }
 .cnt-guide{
     color: #b33939;
@@ -89,6 +90,10 @@ body{
     text-shadow: -1px 0 #FFFFFF, 0 1px #FFFFFF, 1px 0 #FFFFFF, 0 -1px #FFFFFF;
     font-size:1.5em;
     line-height: 28px;
+    letter-spacing: 1px;
+}
+.guide1, .guide2{
+    letter-spacing: 1px;
 }
 
 .btn-copy{
