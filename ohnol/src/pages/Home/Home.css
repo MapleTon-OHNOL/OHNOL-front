@@ -3,17 +3,18 @@
 *{
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 }
+body{
+    overflow-y: scroll;
+}
 
 #main{
     font-size: 21px;
     background-color: whitesmoke;
-    background-image:url('../../imgs/home/backHome.png');
+    background-image:url('../../imgs/home/backRoom.png');
+
+    background-size: contain;
     
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: cover;
-    background-attachment: fixed;
-    
+    height:700px;
     
 }
 
