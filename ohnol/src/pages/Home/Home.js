@@ -12,9 +12,13 @@ import check from "../../imgs/home/checkCircle.png"
 import Count from "./Count";
 import OpenLetter from "./OpenLetter";
 import End from "./End";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
-  // 로그인해야만 보이는 곳입니다
+  // Params로 userID 가져오기 - 아직은 필요하지 않음
+  // const Params = useParams();
+  // console.log(Params)
+
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [style, setStyle] = useState(false)
@@ -23,22 +27,26 @@ const Home = () => {
 
   //복사 완료 뜨게
   const copyComplete = text => {
-    setStyle(style => !style);
-    console.log(style);
-
-    //클립보드복사
-    // 흐름 1.
-    let url = '';
-    const textarea = document.createElement("textarea");
-    document.body.appendChild(textarea);
-    url = window.document.location.href;
-    //url += "/"+identify;
-    textarea.value = url;
-    textarea.select();
-    document.execCommand("copy");
-    console.log(textarea);
-    document.body.removeChild(textarea);
-    alert("클립보드에 복사되었습니다.");
+    if(isLoggedIn){
+      setStyle(style => !style);
+      console.log(style);
+  
+      //클립보드복사
+      // 흐름 1.
+      let url = '';
+      const textarea = document.createElement("textarea");
+      document.body.appendChild(textarea);
+      url = window.document.location.href;
+      //url += "/"+identify;
+      textarea.value = url;
+      textarea.select();
+      document.execCommand("copy");
+      console.log(textarea);
+      document.body.removeChild(textarea);
+      alert("클립보드에 복사되었습니다.");
+    }else{
+      alert('로그인을 하지 않으면 복사할 수 없습니다.')
+    }
     
   }
   
@@ -85,7 +93,12 @@ const Home = () => {
   //작성하러가기
   const navigate = useNavigate();
   const goWrite = () => {
-    navigate("/writeLetter");
+    if(isLoggedIn){
+      navigate("/writeLetter");
+    }else{
+      alert('로그인을 하지 않으면 편지를 작성할 수 없습니다.')
+    }
+    
   };
 
 
