@@ -32,7 +32,6 @@ const Home = () => {
       console.log(style);
   
       //클립보드복사
-      // 흐름 1.
       let url = '';
       const textarea = document.createElement("textarea");
       document.body.appendChild(textarea);
@@ -49,10 +48,6 @@ const Home = () => {
     }
     
   }
-  
-
-  
-
 
   const completeNotify = useEffect(() =>{
     if(style){ //true 이면
