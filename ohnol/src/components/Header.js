@@ -6,6 +6,7 @@ import { UserState } from "../states/UserState";
 import axios from "axios";
 import logo from "../imgs/logo/logo.png";
 import "../css/header.css";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   // 로그인상태
@@ -13,6 +14,15 @@ const Header = () => {
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
 
+
+  const navigate = useNavigate();
+  const goToHome = ()=>{
+    if(isLoggedIn){
+      navigate('/home')
+    }else{
+      alert('로그인을 해야합니다.')
+    }
+  }
   // 회원정보 가져오기
   useEffect(() => {
     if (isLoggedIn) {
@@ -64,9 +74,7 @@ const Header = () => {
   return (
     <div className="headerContainer">
       <div className="logoDiv">
-        <Link to="/home">
-          <img src={logo} alt="로고이미지" />
-        </Link>
+          <img src={logo} alt="로고이미지" onClick={goToHome} />
       </div>
       {/* // login 상태에 따른 토글*/}
       {!isLoggedIn ? (
