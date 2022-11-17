@@ -14,7 +14,10 @@ import OpenLetter from "./OpenLetter";
 import End from "./End";
 
 const Home = () => {
-  // 로그인해야만 보이는 곳입니다
+  // Params로 userID 가져오기 - 아직은 필요하지 않음
+  // const Params = useParams();
+  // console.log(Params)
+
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [style, setStyle] = useState(false)
@@ -23,24 +26,30 @@ const Home = () => {
 
   //복사 완료 뜨게
   const copyComplete = text => {
-    setStyle(style => !style);
-    console.log(style);
-
-    //클립보드복사
-    // 흐름 1.
-    let url = '';
-    const textarea = document.createElement("textarea");
-    document.body.appendChild(textarea);
-    url = window.document.location.href;
-    //url += "/"+identify;
-    textarea.value = url;
-    textarea.select();
-    document.execCommand("copy");
-    console.log(textarea);
-    document.body.removeChild(textarea);
-    alert("클립보드에 복사되었습니다.");
+    if(isLoggedIn){
+      setStyle(style => !style);
+      console.log(style);
+  
+      //클립보드복사
+      // 흐름 1.
+      let url = '';
+      const textarea = document.createElement("textarea");
+      document.body.appendChild(textarea);
+      url = window.document.location.href;
+      //url += "/"+identify;
+      textarea.value = url;
+      textarea.select();
+      document.execCommand("copy");
+      console.log(textarea);
+      document.body.removeChild(textarea);
+      alert("클립보드에 복사되었습니다.");
+    }else{
+      alert('로그인을 하지 않으면 복사할 수 없습니다.')
+    }
     
   }
+  
+
   
 
 
@@ -72,7 +81,7 @@ const Home = () => {
           ] = `Bearer ${accesToken}`)
         )
         .then((response) => {
-          // console.log(response.data);
+          //console.log(response.data);
           setUserState(response.data);
           setIdentify(response.data.identifier);
         })
@@ -112,7 +121,7 @@ const Home = () => {
           <div className="guide-top">
             <span className="name-guide">{userState.username}</span>
             <span className="guide1">님의 집에</span>
-            <span className="cnt-guide">32</span>
+            <span className="cnt-guide">{userState.messageCount}</span>
             <span className="guide2">명이 놀러 왔어요!</span>
           </div>
           <div className="btn-copy" onClick={copyComplete}>
@@ -129,7 +138,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <OpenLetter/>
       <End/> 
       
