@@ -24,18 +24,14 @@ const Home = () => {
   }
   const completeNotify = useEffect(() =>{
     if(style){ //true 이면
-      return(
-        <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
+      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
             <img src={check} width="20px"/>
             <span>복사 완료</span>
-        </div>
-      )
+      </div>
     }
     else{
-      return(
-        <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
-        </div>
-      )
+      <div className="completeCopy" style={{color : {style} ? 'red' : 'blue'}}>
+      </div>
     }
   },[style])
 
@@ -87,7 +83,10 @@ const Home = () => {
             내 집 링크 복사하기
           </div>
           <div className="completeNotf">
-            {completeNotify}
+            {style?       <div className="completeCopy">
+            <img src={check} alt="체크버튼" width="20px"/>
+            <span>복사 완료</span>
+      </div>: null}
           </div>
         </div>
       </section>
