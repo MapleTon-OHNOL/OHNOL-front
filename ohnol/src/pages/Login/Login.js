@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import logo from "../../imgs/logo/logo.png";
 import "./Login.css";
 
+
 const Login = () => {
+
   return (
     <div className="mainLoginContainer">
       <div className="mainLogin">
-        <img src={logo} alt="로고이미지" />
+        <img src={logo} alt="로고이미지"/>
         <p className="bigContent">
           <span>오랜만에</span>
           <span>놀러와~~!</span>
