@@ -9,6 +9,7 @@ import heart from "../../imgs/home/heart.png";
 import countCal from "../../imgs/home/countCal.png"
 import check from "../../imgs/home/checkCircle.png"
 import Count from "./Count";
+import OpenLetter from "./OpenLetter";
 
 const Home = () => {
   // 로그인해야만 보이는 곳입니다
@@ -60,29 +61,32 @@ const Home = () => {
 
 
   return (
-    <section id="main">
-      <img></img>
-      <div className="introduce">
-        <div className="introduce-heart">
-          <img src={heart} alt="리본하트이미지"></img>
-          <span className="introduce-comment">마음이 통하기까지</span>
+    <>
+      <section id="main">
+        <img></img>
+        <div className="introduce">
+          <div className="introduce-heart">
+            <img src={heart} alt="리본하트이미지"></img>
+            <span className="introduce-comment">마음이 통하기까지</span>
+          </div>
+          <Count/>
         </div>
-        <Count/>
-      </div>
 
-      <div className="guide">
-        <div className="guide-top">
-          <span className="name-guide">{userState.username}</span><span className="guide1">님의 집에</span><span className="cnt-guide">32</span><span className="guide2">명이 놀러 왔어요!</span>
+        <div className="guide">
+          <div className="guide-top">
+            <span className="name-guide">{userState.username}</span><span className="guide1">님의 집에</span><span className="cnt-guide">32</span><span className="guide2">명이 놀러 왔어요!</span>
+          </div>
+          <div className="btn-copy" onClick={copyComplete}>
+            내 집 링크 복사하기
+          </div>
+          <div classNmae="completeNotf">
+            {completeNotify}
+          </div>
         </div>
-        <div className="btn-copy" onClick={copyComplete}>
-          내 집 링크 복사하기
-        </div>
-        <div classNmae="completeNotf">
-          {completeNotify}
-        </div>
-        
-      </div>
-    </section>
+      </section>
+
+      <OpenLetter/>
+    </>
   );
 };
 

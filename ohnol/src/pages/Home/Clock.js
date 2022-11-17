@@ -35,7 +35,7 @@ class Clock extends Component {
   render() {
     return (
         <>
-        <table className="calendar" border="1">
+        <table className="calendar">
           <tr className="time">
             <th scope="col"><div className="img-cal"><div className="date days-ten"> {this.state.diffDaysTen}</div></div></th>
             <th scope="col"><div className="img-cal"><div className="date days-one"> {this.state.diffDaysOne}</div></div></th>
