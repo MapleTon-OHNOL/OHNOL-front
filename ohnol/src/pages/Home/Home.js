@@ -33,7 +33,12 @@ const Home = () => {
   const [style, setStyle] = useState(false);
     // 회원정보 상태
     const [userState, setUserState] = useRecoilState(UserState);
+    // 주인의 정보 상태관리
+    const [hostName,setHostName] = useState("")
+    const [hostMessageCount,setHostMessageCount] = useState(0)
 
+    // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
+    // const [timeState,setTimeState] = useState()
 
   //복사 완료 뜨게
   const copyComplete = text => {
@@ -58,10 +63,11 @@ const Home = () => {
       alert("로그인을 하지 않으면 복사할 수 없습니다.");
     }
   };
-    
- 
+
+
   // 회원정보 가져오기
   useEffect(() => {
+    // 로그인 사용자 정보 가져오기
     if (isLoggedIn) {
       const accesToken = localStorage.getItem("user");
       axios
@@ -78,13 +84,28 @@ const Home = () => {
         .catch((error) => {
           console.log(error.response);
         });
+        // 로그인사용자와 페이지주인 id 비교
         if(userState.identifier === userID ){
           setIsOwner(true)
         }
+        
     } 
-    
+     
+    // https://www.notion.so/u-identifier-87d889f353cb44adaca2f3b8ccf39922
+    // TODO 페이지 주인 정보 가져오기 - 가져와서 username 집에 몇명(messageCount)이 놀러왔어요 
+    // TODO + 편지공개시간때 주인의 편지함 messageList에서 message출력
+    axios.post(
+      `http://13.125.105.33:8080/auth/infoByIdentifier`,
+      {identifier:userID}
+    ).then((res)=>{
+      console.log(res);
+      setHostName(res.data.username)
+      setHostMessageCount(res.data.messageCount)
+    }).catch((e)=>{
+      console.log(e)
+    })
   }, []);
-
+  
   //작성하러가기
   const navigate = useNavigate();
   const goWrite = () => {
@@ -121,9 +142,9 @@ const Home = () => {
         <div className="guide">
           <div className="guide-container">
           <div className="guide-top">
-            <span className="name-guide">{userState.username}</span>
+            <span className="name-guide">{hostName}</span>
             <span className="guide1">님의 집에</span>
-              <span className="cnt-guide">{userState.messageCount}</span>
+              <span className="cnt-guide">{hostMessageCount}</span>
             <span className="guide2">명이 놀러 왔어요!</span>
           </div>
           {isOwner? <div className="btn-copy" onClick={copyComplete}>
@@ -141,8 +162,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <OpenLetter />
-      <End /> */}
+      {/* {timeState ?   <OpenLetter />
+      <End /> : null } */}
     </>
   );
 };
