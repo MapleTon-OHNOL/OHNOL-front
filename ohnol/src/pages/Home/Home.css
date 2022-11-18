@@ -193,9 +193,46 @@ body{
 }
 
 .completeCopy{
-    transition: all ease 2s 0s;
+    /*서서히 생기고 사라지기*/
+    animation: fadeout 3s;
+    -moz-animation: fadeout 3s; /* Firefox */
+    -webkit-animation: fadeout 3s; /* Safari and Chrome */
+    -o-animation: fadeout 3s; /* Opera */
+    animation-fill-mode: forwards;
 }
 
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@-moz-keyframes fadeout { /* Firefox */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@-webkit-keyframes fadeout { /* Safari and Chrome */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@-o-keyframes fadeout { /* Opera */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
 
 /* 전체 웹뷰 반응형 웹 만들기 */
 @media screen and (min-width:900px){

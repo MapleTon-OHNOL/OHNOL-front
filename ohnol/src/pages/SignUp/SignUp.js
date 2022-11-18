@@ -63,7 +63,7 @@ const SignUp = () => {
   return (
     <div className="signUpContainer">
       <div className="signUpText">
-        <h2>LOGIN</h2>
+        <h2>SIGN UP</h2>
       </div>
       <div className="signUpImg">
         <img src={signUpImg} alt="회원가입 이미지" />

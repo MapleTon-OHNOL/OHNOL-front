@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useRecoilState } from "recoil";
@@ -18,6 +18,7 @@ import backgroundImg2 from '../../imgs/home/backgroundImg2.png'
 import backgroundImg3 from '../../imgs/home/backgroundImg3.png'
 import backgroundImg4 from '../../imgs/home/backgroundImg4.png'
 import backgroundImg5 from '../../imgs/home/backgroundImg5.png'
+import Modal from './Modal/Modal'
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
@@ -27,11 +28,15 @@ const Home = () => {
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [style, setStyle] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
+  //모달 창 뜨게
+  const closeModal = () => {
+    setModalVisible(false)
+  }
 
   //복사 완료 뜨게
   const copyComplete = text => {
-    if(isLoggedIn){
-      setStyle(style => !style);
+      setStyle(style=>!style)
       console.log(style);
   
       //클립보드복사
@@ -47,12 +52,10 @@ const Home = () => {
       console.log(textarea);
       document.body.removeChild(textarea);
       alert("클립보드에 복사되었습니다.");
-    } else {
-      alert("로그인을 하지 않으면 복사할 수 없습니다.");
-    }
-  };
+      
+  };  
     
- 
+
 
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
@@ -90,6 +93,10 @@ const Home = () => {
 
   return (
     <>
+      {modalVisible && (
+          <Modal visible={modalVisible} closable={true} maskClosable={true} onClose={closeModal}></Modal>
+      )}
+
       <section id="main">
         <img></img>
         <div className="introduce">
@@ -120,7 +127,9 @@ const Home = () => {
             <span className="guide2">명이 놀러 왔어요!</span>
           </div>
           {/* 내 홈화면은 내집링크복사하기 출력 / 다른사람이 들어오면 나도놀러가기 출력 */}
-          <div className="btn-copy" onClick={copyComplete}>
+          <div className="btn-copy" onClick={()=>{
+            copyComplete();
+          }}>
             내 집 링크 복사하기
           </div>
           {/* 다른 사람의 홈화면에서 편지 작성하기 버튼 */}
@@ -133,6 +142,7 @@ const Home = () => {
             <img src={check} alt="체크버튼" width="20px"/>
             <span>복사 완료</span>
           </div>: null}
+          
           </div>
         </div>
       </section>

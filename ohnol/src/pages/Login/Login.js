@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../imgs/logo/logo.png";
+import logo from "../../imgs/logo/logo2.png";
+import items from "../../imgs/login/items.png"
 import "./Login.css";
 
 
@@ -11,15 +12,12 @@ const Login = () => {
       <div className="mainLogin">
         <img src={logo} alt="로고이미지"/>
         <p className="bigContent">
-          <span>오랜만에</span>
-          <span>놀러와~~!</span>
+          오랜만에 놀러와~~!
         </p>
         <p className="content">
-          망설이지마 NO NO NO~! <br />
-          평소에 하고 싶었던 말, 기회가 없어서 못한 말<br />
-          <span>O</span> <span>NOL</span> 을 통해 전달해보세요!
-          <br />
-          크리스마스 이브가 되면 당신의 메세지가 전달됩니다.
+          보고 싶은 사람에게 용기 내서 편지를 작성해 보세요.<br />
+          서로에게 편지를 썼다면 <br />
+          크리스마스이브에 당신의 마음이 전달됩니다!<br />
         </p>
       </div>
     </div>
