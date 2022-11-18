@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { Link } from "react-router-dom";import { useRecoilState } from "recoil";
+
 import { LoginState } from "../states/LoginState";
 import { UserState } from "../states/UserState";
 import axios from "axios";
 import logo from "../imgs/logo/logo.png";
 import "../css/header.css";
 import { useNavigate } from "react-router-dom";
+import { UserID } from "../states/UserID";
 
 const Header = () => {
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
-  const [userID ,setUserId] = useState('')
-
+  const [userID ,setUserId] = useRecoilState(UserID)
+  console.log(userID)
   const navigate = useNavigate();
   const goToHome = ()=>{
     if(isLoggedIn){

@@ -124,9 +124,9 @@ const Home = () => {
             내 집 링크 복사하기
           </div>
           {/* 다른 사람의 홈화면에서 편지 작성하기 버튼 */}
-          {/* <div className="btn-copy" onClick={goWrite}>
-            나도 놀러 가기!
-            </div> */}
+          <div className="btn-copy" onClick={goWrite}>
+            나도 작성하기!
+            </div>
           </div>
           <div className="completeNotf">
             {style?       <div className="completeCopy">
