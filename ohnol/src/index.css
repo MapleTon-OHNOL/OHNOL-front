@@ -47,3 +47,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+;/* 전체 웹뷰 반응형 웹 만들기 */
+@media screen and (min-width:1000px){
+  .treeGiftBell{
+      height: 30vh;
+      width: 100%;
+  }
+  .treeGift{
+      position: relative;
+      height: 300px;
+      left: 500px;
+      bottom: -50px;
+  }
+  
+  .backStyle1{
+      position: relative;
+      top: -200px;
+      
+  }
+  .backStyle2{
+      position: relative;
+      top: -100px;
+      left: 20px;
+  }
+  .backStyle3{
+      position: relative;
+      top: -50px;
+      right: 100px;
+  }
+  
+  .backStyle4{
+      position: relative;
+      top: -150px;
+  }
+  .backStyle5{
+      position: relative;
+      top: -50px;
+      right: 20px;
+  }
+  
+  .bell{
+      position: relative;
+      top: -150px;
+      left: 350px;
+  }
+  
+}

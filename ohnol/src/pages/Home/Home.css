@@ -186,7 +186,7 @@ body{
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width:80%;
+    width:100%;
     min-width: 332px;
     min-height: 47px;
     margin-bottom: 2%;
@@ -195,4 +195,102 @@ body{
 .completeCopy{
     transition: all ease 2s 0s;
 }
+
+
+/* 전체 웹뷰 반응형 웹 만들기 */
+@media screen and (min-width:900px){
+    .treeGiftBell{
+        height: 30vh;
+        width: 100%;
+    }
+    .treeGift{
+        position: relative;
+        height: 300px;
+        left: 250px;
+        bottom: -50px;
+    }
+    
+    .backStyle1{
+        position: relative;
+        top: -200px;
+        left: 250px;
+    }
+    .backStyle2{
+        position: relative;
+        top: -100px;
+        left: 200px;
+    }
+    .backStyle3{
+        position: relative;
+        top: -50px;
+        left: 100px;
+    }
+    
+    .backStyle4{
+        position: relative;
+        top: -150px;
+        left: 200px;
+    }
+    .backStyle5{
+        position: relative;
+        top: -50px;
+        left: 150px;
+    }
+    
+    .bell{
+        position: relative;
+        top: -220px;
+        left: 70px;
+    }
+    
+  }
+
+@media screen and (min-width:1800px){
+
+    .treeGiftBell{
+        height: 30vh;
+        width: 100%;
+    }
+    .treeGift{
+        position: relative;
+        height: 300px;
+        left: 750px;
+        bottom: -50px;
+    }
+    
+    .backStyle1{
+        position: relative;
+        top: -200px;
+        left: 750px;
+    }
+    .backStyle2{
+        position: relative;
+        top: -100px;
+        left: 700px;
+    }
+    .backStyle3{
+        position: relative;
+        top: -50px;
+        left: 600px;
+    }
+    
+    .backStyle4{
+        position: relative;
+        top: -150px;
+        left: 700px;
+    }
+    .backStyle5{
+        position: relative;
+        top: -50px;
+        left: 650px;
+    }
+    
+    .bell{
+        position: relative;
+        top: -220px;
+        left: 570px;
+    }
+    
+  }
+
 
