@@ -19,6 +19,7 @@ import backgroundImg3 from '../../imgs/home/backgroundImg3.png'
 import backgroundImg4 from '../../imgs/home/backgroundImg4.png'
 import backgroundImg5 from '../../imgs/home/backgroundImg5.png'
 import { IsOwner } from "../../states/IsOwner";
+import Modal from "./Modal/Modal";
 
 
 const Home = () => {
@@ -40,8 +41,15 @@ const Home = () => {
     // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
     // const [timeState,setTimeState] = useState()
 
+  //모달
+  const [modalVisible, setModalVisible] = useState(true);
+  const closeModal = () => {
+    setModalVisible(false)
+  } 
+
   //복사 완료 뜨게
   const copyComplete = text => {
+    if(!isLoggedIn){
       setStyle(style=>!style)
       console.log(style);
   
