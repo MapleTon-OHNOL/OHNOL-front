@@ -1,6 +1,6 @@
 body{
     /* 스크롤바 숨기기 */
-    overflow-y: hidden; 
+    /* overflow-y: hidden;  */
 }
 .mainLoginContainer{
     background-color: var(--beige);

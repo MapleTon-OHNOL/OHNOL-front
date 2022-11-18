@@ -16,6 +16,9 @@ const LoginForm = () => {
   // 로그인 상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
 
+  // 에러 메세지 출력
+  const [errors, setErrors] = useState("");
+
   // 로그인 onchange 이벤트
   const onChangeLogin = (e) => {
     const { name, value } = e.target;
@@ -44,6 +47,9 @@ const LoginForm = () => {
       })
       .catch((error) => {
         console.log(error.response);
+        if (error.response.data.code === "NOT_FOUND_USER") {
+          setErrors(error.response.data.message);
+        }
       });
   };
   // 로그인 완료하면 유저정보를 통해서 home/:userID로 이동하기
@@ -96,7 +102,9 @@ const LoginForm = () => {
           onChange={onChangeLogin}
           name="loginPwd"
         ></input>
-
+        {errors ? (
+          <p className="errorMessage">{errors}</p>
+        ) : null}
         <button className="submit" onClick={loginSubmit}>
           <p>로그인하기</p>
         </button>
