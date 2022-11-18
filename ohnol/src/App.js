@@ -25,12 +25,10 @@ function App() {
           {/* 로그인해야만 접근가능한 URL */}
           <Route element={<AuthProvider />}>
             <Route path="/writeLetter" element={<WriteLetter />} />
-          </Route>
+          </Route>``
         </Routes>
         <Footer/>
       </BrowserRouter>
-      
-
     </div>
   );
 }
