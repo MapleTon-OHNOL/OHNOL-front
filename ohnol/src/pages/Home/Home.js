@@ -18,15 +18,22 @@ import backgroundImg2 from '../../imgs/home/backgroundImg2.png'
 import backgroundImg3 from '../../imgs/home/backgroundImg3.png'
 import backgroundImg4 from '../../imgs/home/backgroundImg4.png'
 import backgroundImg5 from '../../imgs/home/backgroundImg5.png'
+import { IsOwner } from "../../states/IsOwner";
+
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
   // const Params = useParams();
   // console.log(Params)
-
+  const { userID } = useParams();
+  console.log(userID)
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+  const [isOwner,setIsOwner] = useRecoilState(IsOwner);
   const [style, setStyle] = useState(false);
+    // 회원정보 상태
+    const [userState, setUserState] = useRecoilState(UserState);
+
 
   //복사 완료 뜨게
   const copyComplete = text => {
@@ -53,10 +60,6 @@ const Home = () => {
   };
     
  
-
-  // 회원정보 상태
-  const [userState, setUserState] = useRecoilState(UserState);
-
   // 회원정보 가져오기
   useEffect(() => {
     if (isLoggedIn) {
@@ -75,7 +78,11 @@ const Home = () => {
         .catch((error) => {
           console.log(error.response);
         });
-    }
+        if(userState.identifier === userID ){
+          setIsOwner(true)
+        }
+    } 
+    
   }, []);
 
   //작성하러가기
@@ -119,14 +126,12 @@ const Home = () => {
               <span className="cnt-guide">{userState.messageCount}</span>
             <span className="guide2">명이 놀러 왔어요!</span>
           </div>
-          {/* 내 홈화면은 내집링크복사하기 출력 / 다른사람이 들어오면 나도놀러가기 출력 */}
-          <div className="btn-copy" onClick={copyComplete}>
+          {isOwner? <div className="btn-copy" onClick={copyComplete}>
             내 집 링크 복사하기
-          </div>
-          {/* 다른 사람의 홈화면에서 편지 작성하기 버튼 */}
-          <div className="btn-copy" onClick={goWrite}>
-            나도 작성하기!
-            </div>
+          </div> : <div className="btn-copy" onClick={goWrite}>
+            나도 놀러가기!
+            </div>}
+
           </div>
           <div className="completeNotf">
             {style?       <div className="completeCopy">
