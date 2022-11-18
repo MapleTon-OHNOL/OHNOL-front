@@ -18,21 +18,27 @@ import backgroundImg2 from '../../imgs/home/backgroundImg2.png'
 import backgroundImg3 from '../../imgs/home/backgroundImg3.png'
 import backgroundImg4 from '../../imgs/home/backgroundImg4.png'
 import backgroundImg5 from '../../imgs/home/backgroundImg5.png'
-import Modal from './Modal/Modal'
+import { IsOwner } from "../../states/IsOwner";
+
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
   // const Params = useParams();
   // console.log(Params)
-
+  const { userID } = useParams();
+  console.log(userID)
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+  const [isOwner,setIsOwner] = useRecoilState(IsOwner);
   const [style, setStyle] = useState(false);
-  const [modalVisible, setModalVisible] = useState(true);
-  //모달 창 뜨게
-  const closeModal = () => {
-    setModalVisible(false)
-  }
+    // 회원정보 상태
+    const [userState, setUserState] = useRecoilState(UserState);
+    // 주인의 정보 상태관리
+    const [hostName,setHostName] = useState("")
+    const [hostMessageCount,setHostMessageCount] = useState(0)
+
+    // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
+    // const [timeState,setTimeState] = useState()
 
   //복사 완료 뜨게
   const copyComplete = text => {
@@ -52,16 +58,15 @@ const Home = () => {
       console.log(textarea);
       document.body.removeChild(textarea);
       alert("클립보드에 복사되었습니다.");
-      
-  };  
-    
+    } else {
+      alert("로그인을 하지 않으면 복사할 수 없습니다.");
+    }
+  };
 
-
-  // 회원정보 상태
-  const [userState, setUserState] = useRecoilState(UserState);
 
   // 회원정보 가져오기
   useEffect(() => {
+    // 로그인 사용자 정보 가져오기
     if (isLoggedIn) {
       const accesToken = localStorage.getItem("user");
       axios
@@ -78,9 +83,28 @@ const Home = () => {
         .catch((error) => {
           console.log(error.response);
         });
-    }
+        // 로그인사용자와 페이지주인 id 비교
+        if(userState.identifier === userID ){
+          setIsOwner(true)
+        }
+        
+    } 
+     
+    // https://www.notion.so/u-identifier-87d889f353cb44adaca2f3b8ccf39922
+    // TODO 페이지 주인 정보 가져오기 - 가져와서 username 집에 몇명(messageCount)이 놀러왔어요 
+    // TODO + 편지공개시간때 주인의 편지함 messageList에서 message출력
+    axios.post(
+      `http://13.125.105.33:8080/auth/infoByIdentifier`,
+      {identifier:userID}
+    ).then((res)=>{
+      console.log(res);
+      setHostName(res.data.username)
+      setHostMessageCount(res.data.messageCount)
+    }).catch((e)=>{
+      console.log(e)
+    })
   }, []);
-
+  
   //작성하러가기
   const navigate = useNavigate();
   const goWrite = () => {
@@ -121,21 +145,17 @@ const Home = () => {
         <div className="guide">
           <div className="guide-container">
           <div className="guide-top">
-            <span className="name-guide">{userState.username}</span>
+            <span className="name-guide">{hostName}</span>
             <span className="guide1">님의 집에</span>
-              <span className="cnt-guide">{userState.messageCount}</span>
+              <span className="cnt-guide">{hostMessageCount}</span>
             <span className="guide2">명이 놀러 왔어요!</span>
           </div>
-          {/* 내 홈화면은 내집링크복사하기 출력 / 다른사람이 들어오면 나도놀러가기 출력 */}
-          <div className="btn-copy" onClick={()=>{
-            copyComplete();
-          }}>
+          {isOwner? <div className="btn-copy" onClick={copyComplete}>
             내 집 링크 복사하기
-          </div>
-          {/* 다른 사람의 홈화면에서 편지 작성하기 버튼 */}
-          {/* <div className="btn-copy" onClick={goWrite}>
-            나도 놀러 가기!
-            </div> */}
+          </div> : <div className="btn-copy" onClick={goWrite}>
+            나도 놀러가기!
+            </div>}
+
           </div>
           <div className="completeNotf">
             {style?       <div className="completeCopy">
@@ -146,8 +166,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <OpenLetter />
-      <End /> */}
+      {/* {timeState ?   <OpenLetter />
+      <End /> : null } */}
     </>
   );
 };
