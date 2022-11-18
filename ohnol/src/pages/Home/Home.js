@@ -13,6 +13,11 @@ import Count from "./Count";
 import OpenLetter from "./OpenLetter";
 import End from "./End";
 import { useParams } from "react-router-dom";
+import backgroundImg from '../../imgs/home/backgroundImg.png'
+import backgroundImg2 from '../../imgs/home/backgroundImg2.png'
+import backgroundImg3 from '../../imgs/home/backgroundImg3.png'
+import backgroundImg4 from '../../imgs/home/backgroundImg4.png'
+import backgroundImg5 from '../../imgs/home/backgroundImg5.png'
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
@@ -46,24 +51,8 @@ const Home = () => {
       alert("로그인을 하지 않으면 복사할 수 없습니다.");
     }
   };
-
-  const completeNotify = useEffect(() => {
-    if (style) {
-      //true 이면
-      <div
-        className="completeCopy"
-        style={{ color: { style } ? "red" : "blue" }}
-      >
-        <img src={check} width="20px" />
-        <span>복사 완료</span>
-      </div>;
-    } else {
-      <div
-        className="completeCopy"
-        style={{ color: { style } ? "red" : "blue" }}
-      ></div>;
-    }
-  }, [style]);
+    
+ 
 
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
@@ -112,26 +101,32 @@ const Home = () => {
         </div>
 
         <div className="treeGiftBell">
-          
-          <img src={treeGift} alt="트리선물이미지"/>
-          <img src={bell} alt="종이미지"/>
+            <img src={treeGift} alt="트리선물이미지" className="treeGift"/>
+            <img src={backgroundImg} alt="배경아이콘" className="backStyle1" />
+            <img src={backgroundImg2} alt="배경아이콘" className="backStyle2" />
+            <img src={backgroundImg3} alt="배경아이콘" className="backStyle3" />
+            <img src={backgroundImg4} alt="배경아이콘" className="backStyle4" />
+            <img src={backgroundImg5} alt="배경아이콘" className="backStyle5" />
+            <img src={bell} alt="종이미지" className="bell"/>
         </div>
 
 
         <div className="guide">
           <div className="guide-container">
-            <div className="guide-top">
-              <span className="name-guide">{userState.username}</span>
-              <span className="guide1">님의 집에</span>
+          <div className="guide-top">
+            <span className="name-guide">{userState.username}</span>
+            <span className="guide1">님의 집에</span>
               <span className="cnt-guide">{userState.messageCount}</span>
-              <span className="guide2">명이 놀러 왔어요!</span>
-            </div>
-            <div className="btn-copy" onClick={copyComplete}>
-              내 집 링크 복사하기
-            </div>
-            <div className="btn-copy" onClick={goWrite}>
-              나도 놀러 가기!
-            </div>
+            <span className="guide2">명이 놀러 왔어요!</span>
+          </div>
+          {/* 내 홈화면은 내집링크복사하기 출력 / 다른사람이 들어오면 나도놀러가기 출력 */}
+          <div className="btn-copy" onClick={copyComplete}>
+            내 집 링크 복사하기
+          </div>
+          {/* 다른 사람의 홈화면에서 편지 작성하기 버튼 */}
+          {/* <div className="btn-copy" onClick={goWrite}>
+            나도 놀러 가기!
+            </div> */}
           </div>
           <div className="completeNotf">
             {style?       <div className="completeCopy">
@@ -141,8 +136,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <OpenLetter />
-      <End />
+      {/* <OpenLetter />
+      <End /> */}
     </>
   );
 };
