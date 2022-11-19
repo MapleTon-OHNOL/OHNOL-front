@@ -20,6 +20,7 @@ import backgroundImg5 from "../../imgs/home/backgroundImg5.png";
 import { IsOwner } from "../../states/IsOwner";
 import Modal from "./Modal/Modal";
 import { LoginOwner } from "../../states/LoginOwner";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
@@ -37,7 +38,11 @@ const Home = () => {
   const [hostMessageCount, setHostMessageCount] = useState(0);
 
   // LoginForm에서 관리할 주인의 ID - 그 경로로 이동시켜줘야함
-  const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
+  const location = useLocation();
+  console.log(location);
+  const locationArr = location.pathname.split("/");
+  const HOST_ID = locationArr[locationArr.length - 1];
+  console.log(HOST_ID);
 
   //모달
   const [modalVisible, setModalVisible] = useState(true);
@@ -52,6 +57,9 @@ const Home = () => {
     if (isLoggedIn) {
       setStyle((style) => !style);
       console.log(style);
+      setTimeout(() => {
+        setStyle(false);
+      }, 1000);
 
       //클립보드복사
       // 흐름 1.
@@ -93,7 +101,6 @@ const Home = () => {
       // 로그인사용자와 페이지주인 id 비교
       if (userState.identifier === userID) {
         setIsOwner(true);
-        setLoginHost(userID);
         console.log("home userID", userID);
       } else {
         setIsOwner(false);
@@ -118,7 +125,9 @@ const Home = () => {
   const navigate = useNavigate();
   const goWrite = () => {
     if (isLoggedIn) {
-      navigate("/writeLetter");
+      navigate("/writeLetter", {
+        state: HOST_ID,
+      });
     } else {
       alert("로그인을 하지 않으면 편지를 작성할 수 없습니다.");
     }
