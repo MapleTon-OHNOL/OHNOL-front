@@ -106,7 +106,7 @@ const Home = () => {
         setIsOwner(false);
       }
     }
-    // 호스트 정보가져와서 정보 렌더링
+    // 호스트 identifier로 간단한 정보가져와서 정보 렌더링
     axios
       .post(`http://13.125.105.33:8080/auth/infoByIdentifier`, {
         identifier: userID,
@@ -121,6 +121,30 @@ const Home = () => {
       });
   }, [isLoggedIn]);
 
+  // 호스트의 구체적 정보 가져옴
+  const accesToken = localStorage.getItem("user");
+  const getHostInfo = () => {
+    axios
+      .get(
+        `http://13.125.105.33:8080/u/${HOST_ID}
+    `,
+        {
+          headers: {
+            Authorization: `Bearer ${accesToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    getHostInfo();
+  });
   //작성하러가기
   const navigate = useNavigate();
   const goWrite = () => {
