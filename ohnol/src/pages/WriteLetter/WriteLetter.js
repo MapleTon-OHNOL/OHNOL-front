@@ -25,6 +25,19 @@ const WriteLetter = () => {
   const HOST_ID = location.state;
   console.log(HOST_ID);
 
+  // HOST_ID로 username가져오기
+  axios
+    .post(`http://13.125.105.33:8080/auth/infoByIdentifier`, {
+      identifier: HOST_ID,
+    })
+    .then((res) => {
+      console.log(res);
+      setUserName(res.data.username);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
   const onChangeContent = (e) => {
     setContent(e.target.value);
   };
