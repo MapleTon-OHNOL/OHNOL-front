@@ -185,6 +185,13 @@ const Home = () => {
       </section>
       {/* {timeState ?   <OpenLetter />
       <End /> : null } */}
+      {/*시간되면 편지함 오픈*/}
+      {open ? ( 
+      <>
+        <OpenLetter />
+        <End />
+      </>
+      ):null}
     </>
   );
 };
