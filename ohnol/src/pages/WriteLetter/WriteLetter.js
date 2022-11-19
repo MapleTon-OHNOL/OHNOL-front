@@ -7,7 +7,8 @@ import "./WriteLetter.css";
 import { useRecoilState } from "recoil";
 import { UserID } from "../../states/UserID";
 import { useNavigate } from "react-router";
-import { IsOwner } from "./../../states/IsOwner";
+import { IsOwner } from "../../states/IsOwner";
+import { LoginOwner } from "../../states/LoginOwner";
 
 const WriteLetter = () => {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ const WriteLetter = () => {
   const [userID, setUserId] = useRecoilState(UserID);
   // console.log(userID)
   const [userName, setUserName] = useState("");
-  const [IsOwner, setIsOwner] = useRecoilState(IsOwner);
+  const [isOwner, setIsOwner] = useRecoilState(IsOwner);
+  const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
 
   const onChangeContent = (e) => {
     setContent(e.target.value);
@@ -26,6 +28,7 @@ const WriteLetter = () => {
   const letterSubmit = (e) => {
     e.preventDefault();
     console.log(content);
+
     // axios post()   header정보 포함  + 홈화면으로 이동
     const accesToken = localStorage.getItem("user");
     axios
@@ -43,8 +46,9 @@ const WriteLetter = () => {
       )
       .then((response) => {
         console.log(response);
+
         alert("편지가 작성되었습니다.");
-        navigate(`home/${IsOwner}`);
+        navigate(`/home/${loginHost}`);
       })
       .catch((error) => {
         console.log(axios.defaults.headers);
@@ -52,11 +56,12 @@ const WriteLetter = () => {
       });
     setContent("");
   };
+
   return (
     <div className="writeLetterContainer">
       <div className="topContent">
         <h3>
-          잠깐! {userName ? userName : "이현진"}님 집에 놀러가기 전에 <br />
+          잠깐! {userName ? userName : "이현진."}님 집에 놀러가기 전에 <br />
           마음이 담긴 편지를 작성해주세요.
         </h3>
       </div>

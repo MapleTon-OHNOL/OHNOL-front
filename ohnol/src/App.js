@@ -23,6 +23,7 @@ function App() {
           <Route element={<AuthProvider />}>
             <Route path="/home/:userID" element={<Home />} />
             <Route path="/writeLetter" element={<WriteLetter />} />
+            <Route path="writeLetter/home/:userID" element={<Home />} />
           </Route>
           ``
         </Routes>
