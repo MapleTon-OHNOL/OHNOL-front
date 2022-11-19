@@ -44,29 +44,3 @@ body{
     text-align: center;
     margin-top:1%;
 }
-
-.items-container > .backStyle1{
-    top:-30px;
-    left:10px;
-}
-
-.items-container > .backStyle2{
-    top:-100px;
-    left:10%;
-}
-.items-container > .backStyle3{
-    top:-90px;
-    left:10%;
-}
-.items-container > .backStyle4{
-    top:-100px;
-    left:10%;
-}
-.items-container > .backStyle5{
-    top:-40px;
-    left:10%;
-}
-.items-container > .backStyle6{
-    top:100px;
-    right:-10%;
-}

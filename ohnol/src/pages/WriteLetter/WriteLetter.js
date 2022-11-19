@@ -34,7 +34,7 @@ const WriteLetter = () => {
     axios
       .post(
         `http://13.125.105.33:8080/u/${userID}`,
-        { data: content },
+        { content: content },
         {
           headers: {
             Authorization: `Bearer ${accesToken}`,

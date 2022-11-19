@@ -24,32 +24,28 @@ import { LoginOwner } from "../../states/LoginOwner";
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
   const { userID } = useParams();
-  // console.log(userID);
+  console.log(userID);
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [isOwner, setIsOwner] = useRecoilState(IsOwner);
-  console.log("isOwner", isOwner);
+
   const [style, setStyle] = useState(false);
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
   // 주인의 정보 상태관리
   const [hostName, setHostName] = useState("");
   const [hostMessageCount, setHostMessageCount] = useState(0);
+
   // LoginForm에서 관리할 주인의 ID - 그 경로로 이동시켜줘야함
   const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
-
-  // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
-  //시간 완료 됐을 때 openLetter
-  const[open, setOpen] = useState(false);
-  useEffect(()=>{
-    const timer = setTimeout(()=>{setOpen(true)},3000)
-  });
 
   //모달
   const [modalVisible, setModalVisible] = useState(true);
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  // 호스트인지 , 손님인지 확인하기
 
   //복사 완료 뜨게
   const copyComplete = (text) => {
@@ -100,10 +96,7 @@ const Home = () => {
         setLoginHost(userID);
       }
     }
-
-    // https://www.notion.so/u-identifier-87d889f353cb44adaca2f3b8ccf39922
-    // TODO 페이지 주인 정보 가져오기 - 가져와서 username 집에 몇명(messageCount)이 놀러왔어요
-    // TODO + 편지공개시간때 주인의 편지함 messageList에서 message출력
+    // 호스트 정보가져와서 정보 렌더링
     axios
       .post(`http://13.125.105.33:8080/auth/infoByIdentifier`, {
         identifier: userID,
@@ -183,15 +176,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* {timeState ?   <OpenLetter />
-      <End /> : null } */}
-      {/*시간되면 편지함 오픈*/}
-      {open ? ( 
-      <>
-        <OpenLetter />
-        <End />
-      </>
-      ):null}
+      {/* <OpenLetter />
+      <End /> */}
     </>
   );
 };
