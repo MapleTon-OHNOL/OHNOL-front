@@ -156,7 +156,7 @@ const Home = () => {
               <span className="cnt-guide">{hostMessageCount}</span>
               <span className="guide2">명이 놀러 왔어요!</span>
             </div>
-            {isOwner ? (
+            {isOwner && isLoggedIn ? (
               <div className="btn-copy" onClick={copyComplete}>
                 내 집 링크 복사하기
               </div>
