@@ -45,7 +45,7 @@ const OpenLetter = ({ hostName }) => {
             <img src={springRed} alt="빨간스프링" />
           </div>
         </div>
-      </div>
+      
     </section>
   );
 };
