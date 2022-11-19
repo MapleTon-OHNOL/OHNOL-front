@@ -94,6 +94,9 @@ const Home = () => {
       if (userState.identifier === userID) {
         setIsOwner(true);
         setLoginHost(userID);
+        console.log("home userID", userID);
+      } else {
+        setIsOwner(false);
       }
     }
     // 호스트 정보가져와서 정보 렌더링

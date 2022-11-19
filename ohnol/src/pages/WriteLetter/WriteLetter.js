@@ -15,7 +15,7 @@ const WriteLetter = () => {
   const [content, setContent] = useState("");
   // 회원정보에서 identifier 가져오기 (전역변수설정)
   const [userID, setUserId] = useRecoilState(UserID);
-  // console.log(userID)
+  console.log(userID);
   const [userName, setUserName] = useState("");
   const [isOwner, setIsOwner] = useRecoilState(IsOwner);
   const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
@@ -28,12 +28,12 @@ const WriteLetter = () => {
   const letterSubmit = (e) => {
     e.preventDefault();
     console.log(content);
-
+    console.log(userID);
     // axios post()   header정보 포함  + 홈화면으로 이동
     const accesToken = localStorage.getItem("user");
     axios
       .post(
-        `http://13.125.105.33:8080/u/${userID}`,
+        `http://13.125.105.33:8080/u/${loginHost}`,
         { content: content },
         {
           headers: {
