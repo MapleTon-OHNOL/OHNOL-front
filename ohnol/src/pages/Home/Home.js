@@ -183,15 +183,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
-      {/*시간되면 편지함 오픈*/}
-      {open ? ( 
-      <>
-        <OpenLetter />
-        <End />
-      </>
-      ):null}
-      
+      {/* {timeState ?   <OpenLetter />
+      <End /> : null } */}
     </>
   );
 };

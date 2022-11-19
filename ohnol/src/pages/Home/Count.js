@@ -8,7 +8,7 @@ class App extends Component {
     /*3초 설정*/
     super(props);
     const now = new Date();
-    now.setSeconds(now.getSeconds()+3);
+    now.setSeconds(now.getSeconds() + 300);
     this.state = { deadline: now };
   }
   render() {
