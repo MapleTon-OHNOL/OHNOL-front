@@ -6,49 +6,57 @@ import houseImg from "../../imgs/writeLetter/house.png";
 import "./WriteLetter.css";
 import { useRecoilState } from "recoil";
 import { UserID } from "../../states/UserID";
+import { useNavigate } from "react-router";
+import { IsOwner } from "./../../states/IsOwner";
 
 const WriteLetter = () => {
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
   // 회원정보에서 identifier 가져오기 (전역변수설정)
-  const [userID ,setUserId] = useRecoilState(UserID)
+  const [userID, setUserId] = useRecoilState(UserID);
   // console.log(userID)
+  const [userName, setUserName] = useState("");
+  const [IsOwner, setIsOwner] = useRecoilState(IsOwner);
 
   const onChangeContent = (e) => {
     setContent(e.target.value);
   };
-
-  
 
   // 작성한 편지 제출하기
   const letterSubmit = (e) => {
     e.preventDefault();
     console.log(content);
     // axios post()   header정보 포함  + 홈화면으로 이동
-    const accesToken  = localStorage.getItem("user")
+    const accesToken = localStorage.getItem("user");
     axios
-        .post(
-          `http://13.125.105.33:8080/u/${userID}`,
-          {data:content},
-          {headers: {
-            "Authorization" :`Bearer ${accesToken}`
-          }}
-          // (axios.defaults.headers.common[
-          //   "Authorization"
-          // ] = `Bearer ${accesToken}`),
-          
-        ).then((response)=>{
-          console.log(response)
-        }).catch((error)=>{
-          console.log(axios.defaults.headers)
-          console.log(error)
-        })
+      .post(
+        `http://13.125.105.33:8080/u/${userID}`,
+        { data: content },
+        {
+          headers: {
+            Authorization: `Bearer ${accesToken}`,
+          },
+        }
+        // (axios.defaults.headers.common[
+        //   "Authorization"
+        // ] = `Bearer ${accesToken}`),
+      )
+      .then((response) => {
+        console.log(response);
+        alert("편지가 작성되었습니다.");
+        navigate(`home/${IsOwner}`);
+      })
+      .catch((error) => {
+        console.log(axios.defaults.headers);
+        console.log(error);
+      });
     setContent("");
   };
   return (
     <div className="writeLetterContainer">
       <div className="topContent">
         <h3>
-          잠깐! 주승우님 집에 놀러가기 전에 <br />
+          잠깐! {userName ? userName : "이현진"}님 집에 놀러가기 전에 <br />
           마음이 담긴 편지를 작성해주세요.
         </h3>
       </div>
