@@ -24,13 +24,12 @@ import { LoginOwner } from "../../states/LoginOwner";
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
-  // const Params = useParams();
-  // console.log(Params)
   const { userID } = useParams();
-  console.log(userID);
+  // console.log(userID);
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [isOwner, setIsOwner] = useRecoilState(IsOwner);
+  console.log("isOwner", isOwner);
   const [style, setStyle] = useState(false);
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
@@ -51,7 +50,7 @@ const Home = () => {
 
   //복사 완료 뜨게
   const copyComplete = (text) => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       setStyle((style) => !style);
       console.log(style);
 

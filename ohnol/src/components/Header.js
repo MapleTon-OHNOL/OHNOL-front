@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";import { useRecoilState } from "recoil";
+import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 import { LoginState } from "../states/LoginState";
 import { UserState } from "../states/UserState";
@@ -8,25 +9,27 @@ import logo from "../imgs/logo/logo.png";
 import "../css/header.css";
 import { useNavigate } from "react-router-dom";
 import { UserID } from "../states/UserID";
+import { IsOwner } from "../states/IsOwner";
 
 const Header = () => {
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
-  const [userID ,setUserId] = useRecoilState(UserID)
-  console.log(userID)
+  const [userID, setUserId] = useRecoilState(UserID);
+  // console.log(userID)
+  const [isOwner, setIsOwner] = useRecoilState(IsOwner);
+
   const navigate = useNavigate();
-  const goToHome = ()=>{
-    if(isLoggedIn){
+  const goToHome = () => {
+    if (isLoggedIn) {
       // 로그인을 했다면 ID같이 URL에 보내기
-      navigate(`/home/${userID}`)
-    }else{
+      navigate(`/home/${userID}`);
+    } else {
       // 로그인하지 않았을 때는 그냥 home으로 보내기
-      navigate('/home/:userID')
+      navigate("/home/:userID");
     }
-      
-  }
+  };
   // 회원정보 가져오기
   useEffect(() => {
     if (isLoggedIn) {
@@ -41,7 +44,7 @@ const Header = () => {
         .then((response) => {
           // console.log(response.data);
           setUserState(response.data);
-          setUserId(response.data.identifier)
+          setUserId(response.data.identifier);
         })
         .catch((error) => {
           console.log(error.response);
@@ -74,12 +77,13 @@ const Header = () => {
       messageCount: 0,
       username: "",
     });
+    setIsOwner(false);
   };
 
   return (
     <div className="headerContainer">
       <div className="logoDiv">
-          <img src={logo} alt="로고이미지" onClick={goToHome} />
+        <img src={logo} alt="로고이미지" onClick={goToHome} />
       </div>
       {/* // login 상태에 따른 토글*/}
       {!isLoggedIn ? (

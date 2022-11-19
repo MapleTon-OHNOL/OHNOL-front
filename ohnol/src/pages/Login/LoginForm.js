@@ -56,10 +56,7 @@ const LoginForm = () => {
       .catch((error) => {
         setErrors(error.response.data.message);
       });
-  };
-  // 로그인 완료하면 유저정보를 통해서 home/:userID로 이동하기
-  // TODO - 링크타고들어온사람은 페이지주인의 home/:주인ID로 이동해야한다
-  useEffect(() => {
+
     if (isLoggedIn) {
       const accesToken = localStorage.getItem("user");
       axios
@@ -82,7 +79,12 @@ const LoginForm = () => {
           console.log(error);
         });
     }
-  }, [isLoggedIn]);
+  };
+  // 로그인 완료하면 유저정보를 통해서 home/:userID로 이동하기
+  // TODO - 링크타고들어온사람은 페이지주인의 home/:주인ID로 이동해야한다
+  // useEffect(() => {
+
+  // }, [isLoggedIn]);
 
   return (
     <div className="loginFormContainer">
