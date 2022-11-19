@@ -31,6 +31,7 @@ const WriteLetter = () => {
 
     // axios post()   header정보 포함  + 홈화면으로 이동
     const accesToken = localStorage.getItem("user");
+    
     axios
       .post(
         `http://13.125.105.33:8080/u/${userID}`,

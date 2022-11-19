@@ -63,7 +63,7 @@ function Modal({ classNameName, onClose, maskClosable, closable, visible }) {
                 크리스마스이브에 당신의 마음이 전달됩니다!<br/>
                 혼자만의 편지라면 전달되지 않고 사라져요 😥 <br/>
                 </div>
-                <div className="neverShow" onClick={Dayclose}>이 창 다시 보지 않기</div>
+                <div className="neverShow" onClick={Dayclose}>오늘 하루 닫기</div>
             </div>
         </div>
     )

@@ -235,10 +235,10 @@ body{
 
 .completeCopy{
     /*서서히 생기고 사라지기*/
-    animation: fadeout 3s;
-    -moz-animation: fadeout 3s; /* Firefox */
-    -webkit-animation: fadeout 3s; /* Safari and Chrome */
-    -o-animation: fadeout 3s; /* Opera */
+    animation: fadeout 1s;
+    -moz-animation: fadeout 1s; /* Firefox */
+    -webkit-animation: fadeout 1s; /* Safari and Chrome */
+    -o-animation: fadeout 1s; /* Opera */
     animation-fill-mode: forwards;
 }
 

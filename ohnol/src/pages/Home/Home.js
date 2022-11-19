@@ -42,7 +42,7 @@ const Home = () => {
   //시간 완료 됐을 때 openLetter
   const[open, setOpen] = useState(false);
   useEffect(()=>{
-    const timer = setTimeout(()=>{setOpen(true)},3000)
+    const timer = setTimeout(()=>{setOpen(true)},30000)
   });
 
   //모달
@@ -56,6 +56,7 @@ const Home = () => {
     if (isLoggedIn) {
       setStyle((style) => !style);
       console.log(style);
+      setTimeout(()=>{setStyle(false)},1000)
 
       //클립보드복사
       // 흐름 1.
@@ -69,11 +70,13 @@ const Home = () => {
       document.execCommand("copy");
       console.log(textarea);
       document.body.removeChild(textarea);
-      alert("클립보드에 복사되었습니다.");
+      //alert("클립보드에 복사되었습니다.");
+      
     } else {
       alert("로그인을 하지 않으면 복사할 수 없습니다.");
     }
   };
+
 
   // 회원정보 가져오기
   useEffect(() => {
