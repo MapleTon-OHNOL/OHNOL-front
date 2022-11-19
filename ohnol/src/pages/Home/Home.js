@@ -44,13 +44,24 @@ const Home = () => {
   const HOST_ID = locationArr[locationArr.length - 1];
   console.log(HOST_ID);
 
+  // 편지확인함 정보 상태관리
+  const [confirmToMe, setConfirmToMe] = useState("");
+  const [fromToMe, setFromToMe] = useState("");
+
   //모달
   const [modalVisible, setModalVisible] = useState(true);
   const closeModal = () => {
     setModalVisible(false);
   };
 
-  // 호스트인지 , 손님인지 확인하기
+  // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
+  //시간 완료 됐을 때 openLetter
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 3000);
+  });
 
   //복사 완료 뜨게
   const copyComplete = (text) => {
@@ -136,6 +147,10 @@ const Home = () => {
       )
       .then((res) => {
         console.log(res);
+        console.log(res.messageList[0].message.toMe);
+        console.log(res.messageList[0].message.fromMe);
+        // setConfirmToMe(res.messageList[0].message.toMe)
+        // setConfirmToMe(res.messageList[0].message.fromMe)
       })
       .catch((e) => {
         console.log(e);
@@ -212,8 +227,12 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <OpenLetter />
-      <End /> */}
+      {open ? (
+        <>
+          <OpenLetter hostName={hostName} />
+          <End />
+        </>
+      ) : null}
     </>
   );
 };
