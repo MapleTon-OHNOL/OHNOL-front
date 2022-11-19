@@ -9,16 +9,34 @@ import { UserID } from "../../states/UserID";
 import { useNavigate } from "react-router";
 import { IsOwner } from "../../states/IsOwner";
 import { LoginOwner } from "../../states/LoginOwner";
+import { useLocation } from "react-router";
 
 const WriteLetter = () => {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   // 회원정보에서 identifier 가져오기 (전역변수설정)
-  const [userID, setUserId] = useRecoilState(UserID);
-  // console.log(userID)
   const [userName, setUserName] = useState("");
   const [isOwner, setIsOwner] = useRecoilState(IsOwner);
-  const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
+
+  // hostID 가져오기
+  const location = useLocation();
+  console.log(location);
+
+  const HOST_ID = location.state;
+  console.log(HOST_ID);
+
+  // HOST_ID로 username가져오기
+  axios
+    .post(`http://13.125.105.33:8080/auth/infoByIdentifier`, {
+      identifier: HOST_ID,
+    })
+    .then((res) => {
+      console.log(res);
+      setUserName(res.data.username);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 
   const onChangeContent = (e) => {
     setContent(e.target.value);
@@ -28,14 +46,13 @@ const WriteLetter = () => {
   const letterSubmit = (e) => {
     e.preventDefault();
     console.log(content);
-
     // axios post()   header정보 포함  + 홈화면으로 이동
     const accesToken = localStorage.getItem("user");
     
     axios
       .post(
-        `http://13.125.105.33:8080/u/${userID}`,
-        { data: content },
+        `http://13.125.105.33:8080/u/${HOST_ID}`,
+        { content: content },
         {
           headers: {
             Authorization: `Bearer ${accesToken}`,
@@ -49,7 +66,7 @@ const WriteLetter = () => {
         console.log(response);
 
         alert("편지가 작성되었습니다.");
-        navigate(`/home/${loginHost}`);
+        navigate(`/home/${HOST_ID}`);
       })
       .catch((error) => {
         console.log(axios.defaults.headers);

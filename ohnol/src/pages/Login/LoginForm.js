@@ -8,13 +8,15 @@ import "./LoginForm.css";
 import loginImg from "../../imgs/login/loginRegister.png";
 import { IsOwner } from "../../states/IsOwner";
 import { LoginOwner } from "../../states/LoginOwner";
+import { useLocation } from "react-router";
 
 const LoginForm = () => {
   // 이 페이지가 주인으로 들어왔는지 확인하기 위한 상태
   const [isOwner, setIsOwner] = useRecoilState(IsOwner);
   // 이 페이지가 주인이 아니라면 host URL로 이동시켜줌
-  const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
-  console.log(loginHost);
+  const location = useLocation();
+  const HOST_ID = location.state;
+  console.log(location.state);
   console.log(isOwner);
   const [loginInputs, setLoginInputs] = useState({
     loginEmail: "",
@@ -69,7 +71,9 @@ const LoginForm = () => {
         .then((response) => {
           if (isOwner) {
             // isOwner가 true일 경우 그 주인페이지로 이동
-            navigate(`/home/${loginHost}`);
+            navigate(`/home/${HOST_ID}`, {
+              state: HOST_ID,
+            });
           } else {
             // isOwner가 false일 경우 자신의 홈페이지로 이동
             navigate(`/home/${response.data.identifier}`);

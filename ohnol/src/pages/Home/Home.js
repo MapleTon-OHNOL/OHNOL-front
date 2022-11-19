@@ -20,15 +20,16 @@ import backgroundImg5 from "../../imgs/home/backgroundImg5.png";
 import { IsOwner } from "../../states/IsOwner";
 import Modal from "./Modal/Modal";
 import { LoginOwner } from "../../states/LoginOwner";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   // Params로 userID 가져오기 - 아직은 필요하지 않음
   const { userID } = useParams();
-  // console.log(userID);
+  console.log(userID);
   // 로그인상태
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [isOwner, setIsOwner] = useRecoilState(IsOwner);
-  console.log("isOwner", isOwner);
+
   const [style, setStyle] = useState(false);
   // 회원정보 상태
   const [userState, setUserState] = useRecoilState(UserState);
@@ -36,20 +37,30 @@ const Home = () => {
   const [hostName, setHostName] = useState("");
   const [hostMessageCount, setHostMessageCount] = useState(0);
   // LoginForm에서 관리할 주인의 ID - 그 경로로 이동시켜줘야함
-  const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
+  const location = useLocation();
+  console.log(location);
+  const locationArr = location.pathname.split("/");
+  const HOST_ID = locationArr[locationArr.length - 1];
+  console.log(HOST_ID);
 
-  // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
-  //시간 완료 됐을 때 openLetter
-  const[open, setOpen] = useState(false);
-  useEffect(()=>{
-    const timer = setTimeout(()=>{setOpen(true)},30000)
-  });
+  // 편지확인함 정보 상태관리
+  const [confirmToMe, setConfirmToMe] = useState("");
+  const [fromToMe, setFromToMe] = useState("");
 
   //모달
   const [modalVisible, setModalVisible] = useState(true);
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
+  //시간 완료 됐을 때 openLetter
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 3000);
+  });
 
   //복사 완료 뜨게
   const copyComplete = (text) => {
@@ -100,13 +111,12 @@ const Home = () => {
       // 로그인사용자와 페이지주인 id 비교
       if (userState.identifier === userID) {
         setIsOwner(true);
-        setLoginHost(userID);
+        console.log("home userID", userID);
+      } else {
+        setIsOwner(false);
       }
     }
-
-    // https://www.notion.so/u-identifier-87d889f353cb44adaca2f3b8ccf39922
-    // TODO 페이지 주인 정보 가져오기 - 가져와서 username 집에 몇명(messageCount)이 놀러왔어요
-    // TODO + 편지공개시간때 주인의 편지함 messageList에서 message출력
+    // 호스트 identifier로 간단한 정보가져와서 정보 렌더링
     axios
       .post(`http://13.125.105.33:8080/auth/infoByIdentifier`, {
         identifier: userID,
@@ -121,11 +131,41 @@ const Home = () => {
       });
   }, [isLoggedIn]);
 
+  // 호스트의 구체적 정보 가져옴
+  const accesToken = localStorage.getItem("user");
+  const getHostInfo = () => {
+    axios
+      .get(
+        `http://13.125.105.33:8080/u/${HOST_ID}
+    `,
+        {
+          headers: {
+            Authorization: `Bearer ${accesToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        console.log(res.messageList[0].message.toMe);
+        console.log(res.messageList[0].message.fromMe);
+        // setConfirmToMe(res.messageList[0].message.toMe)
+        // setConfirmToMe(res.messageList[0].message.fromMe)
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    getHostInfo();
+  });
   //작성하러가기
   const navigate = useNavigate();
   const goWrite = () => {
     if (isLoggedIn) {
-      navigate("/writeLetter");
+      navigate("/writeLetter", {
+        state: HOST_ID,
+      });
     } else {
       alert("로그인을 하지 않으면 편지를 작성할 수 없습니다.");
     }
@@ -166,7 +206,7 @@ const Home = () => {
               <span className="cnt-guide">{hostMessageCount}</span>
               <span className="guide2">명이 놀러 왔어요!</span>
             </div>
-            {isOwner ? (
+            {isOwner && isLoggedIn ? (
               <div className="btn-copy" onClick={copyComplete}>
                 내 집 링크 복사하기
               </div>
@@ -186,15 +226,12 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* {timeState ?   <OpenLetter />
-      <End /> : null } */}
-      {/*시간되면 편지함 오픈*/}
-      {open ? ( 
-      <>
-        <OpenLetter />
-        <End />
-      </>
-      ):null}
+      {open ? (
+        <>
+          <OpenLetter hostName={hostName} />
+          <End />
+        </>
+      ) : null}
     </>
   );
 };

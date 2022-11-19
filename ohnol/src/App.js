@@ -19,9 +19,9 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/loginForm" element={<LoginForm />} />
           <Route path="/signUp" element={<SignUp />} />
+          <Route path="/home/:userID" element={<Home />} />
           {/* 로그인해야만 접근가능한 URL */}
           <Route element={<AuthProvider />}>
-            <Route path="/home/:userID" element={<Home />} />
             <Route path="/writeLetter" element={<WriteLetter />} />
             <Route path="writeLetter/home/:userID" element={<Home />} />
           </Route>

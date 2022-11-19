@@ -10,6 +10,7 @@ import "../css/header.css";
 import { useNavigate } from "react-router-dom";
 import { UserID } from "../states/UserID";
 import { IsOwner } from "../states/IsOwner";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   // 로그인상태
@@ -30,6 +31,18 @@ const Header = () => {
       navigate("/home/:userID");
     }
   };
+
+  // 로그인폼에 URL 넘기기 (에러처리)
+  const location = useLocation();
+  console.log(location);
+  console.log(location.pathname.split("/"));
+  const locationArr = location.pathname.split("/");
+  const HOST_ID = locationArr[locationArr.length - 1];
+  console.log(HOST_ID);
+  const goToLoginForm = () => {
+    navigate("loginForm", { state: HOST_ID });
+  };
+
   // 회원정보 가져오기
   useEffect(() => {
     if (isLoggedIn) {
@@ -88,7 +101,7 @@ const Header = () => {
       {/* // login 상태에 따른 토글*/}
       {!isLoggedIn ? (
         <div className="loginRegisterDiv">
-          <Link to="/loginForm">로그인</Link>
+          <a onClick={goToLoginForm}>로그인</a>
           <Link to="/signUp">회원가입</Link>
         </div>
       ) : (
