@@ -37,6 +37,47 @@ body{
     font-weight: bold;
 }
 
+.finish-container{
+    text-align: center;
+    animation-name: bounce;
+    animation-duration:2s;
+    animation-iteration-count : infinite;
+    animation-direction:normal;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode:both;
+    animation-delay:1s;
+}
+@keyframes bounce{
+    0%, 100%{transform:translate(0,0)}
+    50%{transform:translate(0,-20px)}
+}
+
+@-webkit-keyframes bounce{
+    0%, 100%{transform:translate(0,0)}
+    50%{transform:translate(0,-20px)}
+}
+
+
+.finish-eve{
+    font-size:2em;
+    color:#218C74;
+    font-weight: 900;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.finish-eve span{
+    font-size:1em;
+    color:#B33939;
+    font-weight: 900;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.finish-comment{
+    color:#584941;
+    font-weight: 700;
+    font-size:1.8em;
+}
+
+
 /*
 .img-cal{
     width: 35px;

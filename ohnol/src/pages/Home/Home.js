@@ -5,7 +5,6 @@ import { useRecoilState } from "recoil";
 import { LoginState } from "../../states/LoginState";
 import { UserState } from "../../states/UserState";
 import axios from "axios";
-import heart from "../../imgs/home/heart.png";
 import treeGift from "../../imgs/home/treeGift.png";
 import bell from "../../imgs/home/bell.png";
 import check from "../../imgs/home/checkCircle.png";
@@ -97,7 +96,7 @@ const Home = () => {
         }
         
     } 
-     
+    
     // https://www.notion.so/u-identifier-87d889f353cb44adaca2f3b8ccf39922
     // TODO 페이지 주인 정보 가져오기 - 가져와서 username 집에 몇명(messageCount)이 놀러왔어요 
     // TODO + 편지공개시간때 주인의 편지함 messageList에서 message출력
@@ -132,10 +131,6 @@ const Home = () => {
       <section id="main">
         <img></img>
         <div className="introduce">
-          <div className="introduce-heart">
-            <img src={heart} alt="리본하트이미지"></img>
-            <span className="introduce-comment">마음이 통하기까지</span>
-          </div>
           <Count />
         </div>
 
