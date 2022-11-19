@@ -39,7 +39,11 @@ const Home = () => {
   const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
 
   // TODO - timeState 로 마감시간 지나면 openLetter End 컴포넌트 보여줌
-  // const [timeState,setTimeState] = useState()
+  //시간 완료 됐을 때 openLetter
+  const[open, setOpen] = useState(false);
+  useEffect(()=>{
+    const timer = setTimeout(()=>{setOpen(true)},3000)
+  });
 
   //모달
   const [modalVisible, setModalVisible] = useState(true);
@@ -179,8 +183,15 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* {timeState ?   <OpenLetter />
-      <End /> : null } */}
+      
+      {/*시간되면 편지함 오픈*/}
+      {open ? ( 
+      <>
+        <OpenLetter />
+        <End />
+      </>
+      ):null}
+      
     </>
   );
 };
