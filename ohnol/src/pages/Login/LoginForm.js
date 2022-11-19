@@ -6,8 +6,16 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router";
 import "./LoginForm.css";
 import loginImg from "../../imgs/login/loginRegister.png";
+import { IsOwner } from "../../states/IsOwner";
+import { LoginOwner } from "../../states/LoginOwner";
 
 const LoginForm = () => {
+  // 이 페이지가 주인으로 들어왔는지 확인하기 위한 상태
+  const [isOwner, setIsOwner] = useRecoilState(IsOwner);
+  // 이 페이지가 주인이 아니라면 host URL로 이동시켜줌
+  const [loginHost, setLoginHost] = useRecoilState(LoginOwner);
+  console.log(loginHost);
+  console.log(isOwner);
   const [loginInputs, setLoginInputs] = useState({
     loginEmail: "",
     loginPwd: "",
@@ -46,14 +54,9 @@ const LoginForm = () => {
         setIsLoggedIn(true); // 로그인 상태변경
       })
       .catch((error) => {
-        console.log(error.response);
-        if (error.response.data.code === "NOT_FOUND_USER") {
-          setErrors(error.response.data.message);
-        }
+        setErrors(error.response.data.message);
       });
-  };
-  // 로그인 완료하면 유저정보를 통해서 home/:userID로 이동하기
-  useEffect(()=>{
+
     if (isLoggedIn) {
       const accesToken = localStorage.getItem("user");
       axios
@@ -64,16 +67,24 @@ const LoginForm = () => {
           ] = `Bearer ${accesToken}`)
         )
         .then((response) => {
-          navigate(`/home/${response.data.identifier}`);
+          if (isOwner) {
+            // isOwner가 true일 경우 그 주인페이지로 이동
+            navigate(`/home/${loginHost}`);
+          } else {
+            // isOwner가 false일 경우 자신의 홈페이지로 이동
+            navigate(`/home/${response.data.identifier}`);
+          }
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error);
         });
     }
-  },[isLoggedIn])
+  };
+  // 로그인 완료하면 유저정보를 통해서 home/:userID로 이동하기
+  // TODO - 링크타고들어온사람은 페이지주인의 home/:주인ID로 이동해야한다
+  // useEffect(() => {
 
-
-  
+  // }, [isLoggedIn]);
 
   return (
     <div className="loginFormContainer">
@@ -102,9 +113,7 @@ const LoginForm = () => {
           onChange={onChangeLogin}
           name="loginPwd"
         ></input>
-        {errors ? (
-          <p className="errorMessage">{errors}</p>
-        ) : null}
+        {errors ? <p className="errorMessage">{errors}</p> : null}
         <button className="submit" onClick={loginSubmit}>
           <p>로그인하기</p>
         </button>
