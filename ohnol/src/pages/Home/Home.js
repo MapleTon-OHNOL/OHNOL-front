@@ -179,8 +179,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* {timeState ?   <OpenLetter />
-      <End /> : null } */}
+      <OpenLetter />
+      <End />
     </>
   );
 };
